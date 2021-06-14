@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import axios from "axios";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -42,10 +43,12 @@ import kendall from "assets/img/faces/kendall.jpg";
 import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-pro-react/views/profilePageStyle.js";
+import ImageUpload from "../../components/CustomUpload/ImageUpload";
 
 const useStyles = makeStyles(profilePageStyle);
 
 export default function ProfilePage({ ...rest }) {
+  const [avatar, setAvatar] = React.useState('');
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -57,6 +60,30 @@ export default function ProfilePage({ ...rest }) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
+  const changeAvatar = (file) => {
+    setAvatar(file);
+  }
+
+  const fireAxios = () => {
+    console.log("Axios");
+    let axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+      }
+    };
+    let newUser = {
+      name: "Jean Luc",
+      avatar,
+      email: "Low",
+      password: "Bon Appatit",
+    };
+    axios
+        .post("http://localhost:3000/user/", newUser, axiosConfig)
+        .then((res) => console.log(res.data, "This from Axios"))
+  }
+
   return (
     <div>
       <Header
@@ -78,10 +105,20 @@ export default function ProfilePage({ ...rest }) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div className={classes.container}>
           <GridContainer justify="center">
+            <GridItem xs={12} sm={3} md={3}>
+              <h4>Avatar</h4>
+              <ImageUpload
+                  avatar
+                  addButtonProps={{ round: true }}
+                  changeButtonProps={{ round: true }}
+                  removeButtonProps={{ round: true, color: "danger" }}
+                  onChange={file => changeAvatar(file)}
+              />
+            </GridItem>
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
-                  <img src={christian} alt="..." className={imageClasses} />
+                  <img src={christian} alt="..." className={imageClasses} onClick={() => fireAxios()} />
                 </div>
                 <div className={classes.name}>
                   <h3 className={classes.title}>Christian Louboutin</h3>
