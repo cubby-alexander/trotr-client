@@ -206,7 +206,10 @@ const headerStyle = theme => ({
     right: "8px",
     top: "9px",
     zIndex: "1"
-  }
+  },
+  logo: {
+    maxHeight: "50px",
+  },
 });
 
 export default headerStyle;

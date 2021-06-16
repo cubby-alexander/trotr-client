@@ -22,6 +22,8 @@ const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [loginModal, setLoginModal] = React.useState(false);
+  const [signupModal, setSignupModal] = React.useState(false);
   const classes = useStyles();
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
@@ -67,7 +69,9 @@ export default function Header(props) {
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         <Button className={classes.title}>
-          <Link to="/">{brand}</Link>
+          <Link to="/">
+            <img src="/logo.png" alt="Logo" className={classes.logo} />
+          </Link>
         </Button>
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>

@@ -60,8 +60,9 @@ ReactDOM.render(
       <Route path="/product-page" component={ProductPage} />
       <Route path="/sections" component={SectionsPage} />
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
-      <Route path="/signup-page" component={SignupPage} />
+      <Route path="/signup" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />
+      <Route path="/presentation" component={PresentationPage} />
       <Route path="/" component={PresentationPage} />
     </Switch>
   </Router>,

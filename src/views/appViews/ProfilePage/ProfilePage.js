@@ -15,11 +15,11 @@ import People from "@material-ui/icons/People";
 import Add from "@material-ui/icons/Add";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/Header/Header.js";
+import Header from "components/appComponents/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
+import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
