@@ -21,9 +21,9 @@ import Parallax from "components/Parallax/Parallax.js";
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.js";
 
 // Sections for this page
-import SectionProduct from "./Sections/SectionProduct.js";
-import SectionTeam from "./Sections/SectionTeam.js";
-import SectionWork from "./Sections/SectionWork.js";
+// import SectionProduct from "./Sections/SectionProduct.js";
+// import SectionTeam from "./Sections/SectionTeam.js";
+// import SectionWork from "./Sections/SectionWork.js";
 
 const useStyles = makeStyles(landingPageStyle);
 
@@ -37,7 +37,6 @@ export default function LandingPage({ ...rest }) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit PRO React"
         links={<HeaderLinks dropdownHoverColor="info" />}
         fixed
         changeColorOnScroll={{
@@ -46,11 +45,11 @@ export default function LandingPage({ ...rest }) {
         }}
         {...rest}
       />
-      <Parallax image={require("assets/img/bg8.jpg")} filter="dark">
+      <Parallax>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={6} md={6}>
-              <h1 className={classes.title}>Your Story Starts With Us.</h1>
+              <h1 className={classes.title}>"Social Media" That Happens In Person</h1>
               <h4>
                 Every landing page needs a small description after the big bold
                 title, that{"'"}s why we added this text here. Add here all the
@@ -59,7 +58,7 @@ export default function LandingPage({ ...rest }) {
               </h4>
               <br />
               <Button
-                color="danger"
+                color="primary"
                 size="lg"
                 href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
                 target="_blank"

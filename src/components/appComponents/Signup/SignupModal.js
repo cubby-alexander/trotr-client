@@ -54,7 +54,7 @@ export default function SignupModal() {
     return (
         <div>
             <Button
-                color={window.innerWidth < 960 ? "info" : "white"}
+                color="primary"
                 target="_blank"
                 className={classes.navButton}
                 round

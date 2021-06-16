@@ -15,6 +15,7 @@ import ShoppingCartPage from "./views/ShoppingCartPage/ShoppingCartPage";
 import SignupPage from "./views/appViews/SignupPage/SignupPage";
 import ErrorPage from "./views/ErrorPage/ErrorPage";
 import PresentationPage from "./views/PresentationPage/PresentationPage";
+import HomePage from "./views/appViews/HomePage/HomePage";
 import {createBrowserHistory} from "history";
 import React from "react";
 import {Router, Switch, Route} from "react-router";
@@ -42,7 +43,7 @@ export default function Routing(props) {
             <Route path="/signup" component={SignupPage} />
             <Route path="/error-page" component={ErrorPage} />
             <Route path="/presentation" component={PresentationPage} />
-            <Route path="/" component={PresentationPage} />
+            <Route path="/" component={HomePage} />
         </Switch>
     </Router>
     )

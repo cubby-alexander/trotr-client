@@ -100,12 +100,12 @@ export default function ProfilePage({ ...rest }) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit PRO React"
-        links={<HeaderLinks dropdownHoverColor="info" />}
+        brand=""
+        links={<HeaderLinks dropdownHoverColor="primary" />}
         fixed
         changeColorOnScroll={{
           height: 200,
-          color: "info"
+          color: "primary"
         }}
         {...rest}
       />
