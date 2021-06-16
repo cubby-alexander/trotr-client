@@ -18,9 +18,9 @@ import Favorite from "@material-ui/icons/Favorite";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Table from "components/Table/Table.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 import Media from "components/Media/Media.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import Paginations from "components/Pagination/Pagination.js";
 
 import style from "assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.js";

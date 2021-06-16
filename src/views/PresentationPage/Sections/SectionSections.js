@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 // core components
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 

@@ -12,7 +12,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import Info from "components/Typography/Info.js";
 import Danger from "components/Typography/Danger.js";
 import Success from "components/Typography/Success.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import blogsStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/blogsStyle.js";
 

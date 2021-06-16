@@ -32,7 +32,7 @@ import Danger from "components/Typography/Danger.js";
 import Success from "components/Typography/Success.js";
 import Warning from "components/Typography/Warning.js";
 import Rose from "components/Typography/Rose.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/views/componentsSections/sectionCards.js";
 

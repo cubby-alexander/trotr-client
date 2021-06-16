@@ -14,7 +14,7 @@ import Header from "components/appComponents/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 

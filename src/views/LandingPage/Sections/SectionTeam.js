@@ -11,7 +11,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import Muted from "components/Typography/Muted.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import cardProfile1Square from "assets/img/faces/card-profile1-square.jpg";
 import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";

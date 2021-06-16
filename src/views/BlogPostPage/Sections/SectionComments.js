@@ -9,8 +9,8 @@ import Favorite from "@material-ui/icons/Favorite";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Media from "components/Media/Media.js";
-import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 
 import profile4 from "assets/img/faces/card-profile4-square.jpg";
 import profile1 from "assets/img/faces/card-profile1-square.jpg";

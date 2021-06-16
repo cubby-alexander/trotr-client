@@ -1,4 +1,10 @@
-import Button from "../../CustomButtons/Button";
+import React from "react";
+import {useState} from "react";
+import axios from "axios";
+
+import {makeStyles} from "@material-ui/core/styles";
+
+import Button from "../CustomButtons/Button";
 import Assignment from "@material-ui/icons/Assignment";
 import Dialog from "@material-ui/core/Dialog";
 import Card from "../../Card/Card";
@@ -11,7 +17,7 @@ import InfoArea from "../../InfoArea/InfoArea";
 import Timeline from "@material-ui/icons/Timeline";
 import Code from "@material-ui/icons/Code";
 import Group from "@material-ui/icons/Group";
-import CustomInput from "../../CustomInput/CustomInput";
+import CustomInput from "../CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
@@ -19,11 +25,10 @@ import Icon from "@material-ui/core/Icon";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Check from "@material-ui/icons/Check";
-import React from "react";
-import {useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
+
 import styles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.js";
 import Slide from "@material-ui/core/Slide";
+import SnackbarContent from "../../Snackbar/SnackbarContent";
 
 const useStyles = makeStyles(styles);
 
@@ -35,7 +40,17 @@ Transition.displayName = "Transition";
 
 export default function SignupModal() {
     const [signupModal, setSignupModal] = useState(false);
-    const [checked, setChecked] = React.useState([]);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const [nameError, setNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [confirmError, setConfirmError] = useState(false);
+    const [checked, setChecked] = useState([]);
+    const [displayError, setDisplayError] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
 
     const classes = useStyles();
 
@@ -50,6 +65,51 @@ export default function SignupModal() {
         }
         setChecked(newChecked);
     };
+
+    const submitSignUp = () => {
+        setDisplayError(false);
+        setErrorMessages([]);
+        let errors = [];
+        if (password !== confirm || name === "" || checked === [] || password === "") {
+            if (password !== confirm) {
+                setPasswordError(true);
+                setConfirmError(true);
+                errors.push("'Password' and 'Confirm Password' fields do not match")
+            }
+            if (password === "") {
+                setPasswordError(true);
+                errors.push("'Password' field is empty")
+            }
+            if (name === "") {
+                setNameError(true);
+                errors.push("'Full Name' field is empty")
+            }
+            if (email === "") {
+                setEmailError(true);
+                errors.push("'Email' field is empty")
+            }
+            if (checked !== [1]) {
+                console.log("checked error")
+                errors.push("Did not agree to terms and conditions");
+            }
+            setDisplayError(true);
+            setErrorMessages(errors);
+        } else {
+            let axiosCongig = {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+            };
+            let newUser = {
+                name,
+                email,
+                password
+            }
+            axios.post("http://localhost:3000/user/", newUser, axiosCongig)
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err))
+        }
+    }
+
 
     return (
         <div>
@@ -96,7 +156,7 @@ export default function SignupModal() {
                         <h3
                             className={classes.cardTitle + " " + classes.modalTitle}
                         >
-                            Register
+                            Create A Trotr Account
                         </h3>
                     </DialogTitle>
                     <DialogContent
@@ -155,28 +215,17 @@ export default function SignupModal() {
                                 md={5}
                                 className={classes.mrAuto}
                             >
-                                <div className={classes.textCenter}>
-                                    <Button justIcon round color="twitter">
-                                        <i className="fab fa-twitter" />
-                                    </Button>
-                                    {` `}
-                                    <Button justIcon round color="dribbble">
-                                        <i className="fab fa-dribbble" />
-                                    </Button>
-                                    {` `}
-                                    <Button justIcon round color="facebook">
-                                        <i className="fab fa-facebook-f" />
-                                    </Button>
-                                    {` `}
+                                    <div className={classes.textCenter}>
                                     <h4 className={classes.socialTitle}>
-                                        or be classical
+                                    Account Information
                                     </h4>
-                                </div>
+                                    </div>
                                 <form className={classes.form}>
                                     <CustomInput
                                         formControlProps={{
                                             fullWidth: true,
-                                            className: classes.customFormControlClasses
+                                            className: classes.customFormControlClasses,
+                                            error: nameError,
                                         }}
                                         inputProps={{
                                             startAdornment: (
@@ -189,13 +238,15 @@ export default function SignupModal() {
                                                     />
                                                 </InputAdornment>
                                             ),
-                                            placeholder: "First Name..."
+                                            placeholder: "Full Name...",
+                                            onChange: (e) => setName(e.target.value),
                                         }}
                                     />
                                     <CustomInput
                                         formControlProps={{
                                             fullWidth: true,
-                                            className: classes.customFormControlClasses
+                                            className: classes.customFormControlClasses,
+                                            error: emailError,
                                         }}
                                         inputProps={{
                                             startAdornment: (
@@ -208,13 +259,15 @@ export default function SignupModal() {
                                                     />
                                                 </InputAdornment>
                                             ),
-                                            placeholder: "Email..."
+                                            placeholder: "Email...",
+                                            onChange: (e) => setEmail(e.target.value),
                                         }}
                                     />
                                     <CustomInput
                                         formControlProps={{
                                             fullWidth: true,
-                                            className: classes.customFormControlClasses
+                                            className: classes.customFormControlClasses,
+                                            error: passwordError,
                                         }}
                                         inputProps={{
                                             startAdornment: (
@@ -229,7 +282,32 @@ export default function SignupModal() {
                                                     </Icon>
                                                 </InputAdornment>
                                             ),
-                                            placeholder: "Password..."
+                                            placeholder: "Password...",
+                                            onChange: (e) => setPassword(e.target.value)
+                                        }}
+                                    />
+                                    <CustomInput
+                                        formControlProps={{
+                                            fullWidth: true,
+                                            className: classes.customFormControlClasses,
+                                            error: confirmError,
+                                        }}
+                                        inputProps={{
+                                            startAdornment: (
+                                                <InputAdornment
+                                                    position="start"
+                                                    className={classes.inputAdornment}
+                                                >
+                                                    <Icon
+                                                        className={classes.inputAdornmentIcon}
+                                                    >
+                                                        lock_outline
+                                                    </Icon>
+                                                </InputAdornment>
+                                            ),
+                                            placeholder: "Confirm Password...",
+                                            onFocus: () => setConfirmError(false),
+                                            onChange: (e) => setConfirm(e.target.value),
                                         }}
                                     />
                                     <FormControlLabel
@@ -260,13 +338,33 @@ export default function SignupModal() {
                                         }
                                     />
                                     <div className={classes.textCenter}>
-                                        <Button round color="primary">
-                                            Get started
+                                        <Button
+                                            round
+                                            color="primary"
+                                            onClick={() => submitSignUp()}
+                                        >
+                                            Sign Up
                                         </Button>
                                     </div>
                                 </form>
                             </GridItem>
                         </GridContainer>
+                        {displayError ? <SnackbarContent
+                            message={
+                                <span>
+                                            <b>Form contains missing or incorrect Info:</b>
+                                            <br />
+                                    <ul>
+                                        {errorMessages.map((error, idx) => {
+                                            return <li key={idx}>{error}</li>
+                                        })}
+                                    </ul>
+                                        </span>
+                            }
+                            close
+                            color="danger"
+                            icon="info_outline"
+                        /> : ""}
                     </DialogContent>
                 </Card>
             </Dialog>

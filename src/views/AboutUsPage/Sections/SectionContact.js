@@ -10,8 +10,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import contactStyle from "assets/jss/material-kit-pro-react/views/aboutUsSections/contactStyle.js";
 

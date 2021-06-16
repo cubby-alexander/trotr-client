@@ -22,8 +22,8 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
-import Button from "components/CustomButtons/Button.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import contactsStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/contactsStyle.js";
 

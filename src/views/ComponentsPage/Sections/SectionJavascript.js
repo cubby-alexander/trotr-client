@@ -35,12 +35,12 @@ import Layers from "@material-ui/icons/Layers";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 import Instruction from "components/Instruction/Instruction.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomFileInput from "components/CustomFileInput/CustomFileInput.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import Accordion from "components/Accordion/Accordion.js";

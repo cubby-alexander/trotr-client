@@ -9,7 +9,7 @@ import Store from "@material-ui/icons/Store";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import pricingStyle from "assets/jss/material-kit-pro-react/views/presentationSections/pricingStyle.js";
 

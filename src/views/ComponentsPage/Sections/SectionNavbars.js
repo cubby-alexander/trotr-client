@@ -15,9 +15,9 @@ import Explore from "@material-ui/icons/Explore";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Header from "components/appComponents/Header/Header.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
 
 import navbarsStyle from "assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.js";
 

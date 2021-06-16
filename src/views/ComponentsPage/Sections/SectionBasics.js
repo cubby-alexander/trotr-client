@@ -22,8 +22,8 @@ import FiberManualRecord from "@material-ui/icons/FiberManualRecord";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import Button from "components/appComponents/CustomButtons/Button.js";
+import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 import Paginations from "components/Pagination/Pagination.js";
 import Badge from "components/Badge/Badge.js";
