@@ -43,7 +43,7 @@ import kendall from "assets/img/faces/kendall.jpg";
 import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-pro-react/views/profilePageStyle.js";
-import ImageUpload from "../../components/CustomUpload/ImageUpload";
+import ImageUpload from "../../../components/CustomUpload/ImageUpload";
 
 const useStyles = makeStyles(profilePageStyle);
 
@@ -69,18 +69,30 @@ export default function ProfilePage({ ...rest }) {
     console.log("Axios");
     let axiosConfig = {
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
+        'Content-Type': 'multipart/form-data',
         "Access-Control-Allow-Origin": "*",
       }
     };
     let newUser = {
       name: "Jean Luc",
-      avatar,
       email: "Low",
       password: "Bon Appatit",
     };
+    let data = new FormData();
+    for (const key of Object.keys(newUser)) {
+      console.log("appending ", key, newUser[key])
+      data.append(key, newUser[key])
+    }
+    console.log(data);
+    data.append("avatar", avatar);
+    for (var key of data.keys()) {
+      console.log(key);
+    }
+    for (var value of data.values()) {
+      console.log(value);
+    }
     axios
-        .post("http://localhost:3000/user/", newUser, axiosConfig)
+        .post("http://localhost:3000/user/", data, axiosConfig)
         .then((res) => console.log(res.data, "This from Axios"))
   }
 

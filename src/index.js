@@ -36,10 +36,10 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import ProductPage from "views/ProductPage/ProductPage.js";
 import SectionsPage from "views/SectionsPage/SectionsPage.js";
 import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.js";
-import SignupPage from "views/SignupPage/SignupPage.js";
+import SignupPage from "views/appViews/SignupPage/SignupPage.js";
 import ErrorPage from "views/ErrorPage/ErrorPage.js";
 
-import Profile from "views/appViews/ProfilePage.js";
+import Profile from "views/appViews/ProfilePage/ProfilePage.js";
 
 var hist = createBrowserHistory();
 
@@ -63,9 +63,6 @@ ReactDOM.render(
       <Route path="/signup-page" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} />
-
-      <Route path="/tester" component={ErrorPage} />
-
     </Switch>
   </Router>,
   document.getElementById("root")

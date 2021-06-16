@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import React from "react";
+import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -36,6 +37,9 @@ const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
   const [checked, setChecked] = React.useState([1]);
+  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -51,6 +55,21 @@ export default function SignUpPage({ ...rest }) {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  const createUser = () => {
+    console.log("Axios")
+    let axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json;char=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+      }
+    };
+    let newUser = { name, email, password};
+    axios.post("http://localhost:3000/user/", newUser, axiosConfig)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+  }
+
   return (
     <div>
       <Header
@@ -72,7 +91,7 @@ export default function SignUpPage({ ...rest }) {
           <GridContainer justify="center">
             <GridItem xs={12} sm={10} md={10}>
               <Card className={classes.cardSignup}>
-                <h2 className={classes.cardTitle}>Register</h2>
+                <h2 className={classes.cardTitle}>Create Trotr Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
@@ -131,7 +150,8 @@ export default function SignUpPage({ ...rest }) {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "First Name..."
+                            placeholder: "First Name...",
+                            onChange: (e) => setName(e.target.value)
                           }}
                         />
                         <CustomInput
@@ -148,7 +168,8 @@ export default function SignUpPage({ ...rest }) {
                                 <Email className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "Email..."
+                            placeholder: "Email...",
+                            onChange: (e) => setEmail(e.target.value)
                           }}
                         />
                         <CustomInput
@@ -167,7 +188,8 @@ export default function SignUpPage({ ...rest }) {
                                 </Icon>
                               </InputAdornment>
                             ),
-                            placeholder: "Password..."
+                            placeholder: "Password...",
+                            onChange: (e) => {setPassword(e.target.value)}
                           }}
                         />
                         <FormControlLabel
@@ -197,7 +219,7 @@ export default function SignUpPage({ ...rest }) {
                           }
                         />
                         <div className={classes.textCenter}>
-                          <Button round color="primary">
+                          <Button round color="primary" onClick={() => createUser()}>
                             Get started
                           </Button>
                         </div>
