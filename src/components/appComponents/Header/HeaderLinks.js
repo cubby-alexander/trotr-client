@@ -44,6 +44,7 @@ import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
 import LoginModal from "../Login/LoginModal";
+import SignupModal from "../Signup/SignupModal";
 
 const useStyles = makeStyles(styles);
 
@@ -246,21 +247,12 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
-
       <ListItem className={classes.listItem}>
         <LoginModal />
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <Button
-          href="/signup"
-          color={window.innerWidth < 960 ? "info" : "white"}
-          target="_blank"
-          className={classes.navButton}
-          round
-        >
-           sign up
-        </Button>
+        <SignupModal />
       </ListItem>
     </List>
   );

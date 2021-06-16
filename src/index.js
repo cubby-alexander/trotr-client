@@ -17,7 +17,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router";
+import App from "./App";
 
 import "assets/scss/material-kit-pro-react.scss?v=1.9.0";
 
@@ -44,27 +44,6 @@ import Profile from "views/appViews/ProfilePage/ProfilePage.js";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/about-us" component={AboutUsPage} />
-      <Route path="/blog-post" component={BlogPostPage} />
-      <Route path="/blog-posts" component={BlogPostsPage} />
-      <Route path="/components" component={ComponentsPage} />
-      <Route path="/contact-us" component={ContactUsPage} />
-      <Route path="/ecommerce-page" component={EcommercePage} />
-      <Route path="/landing-page" component={LandingPage} />
-      <Route path="/login-page" component={LoginPage} />
-      <Route path="/pricing" component={PricingPage} />
-      <Route path="/profile" component={Profile} />
-      <Route path="/profile-page" component={ProfilePage} />
-      <Route path="/product-page" component={ProductPage} />
-      <Route path="/sections" component={SectionsPage} />
-      <Route path="/shopping-cart-page" component={ShoppingCartPage} />
-      <Route path="/signup" component={SignupPage} />
-      <Route path="/error-page" component={ErrorPage} />
-      <Route path="/presentation" component={PresentationPage} />
-      <Route path="/" component={PresentationPage} />
-    </Switch>
-  </Router>,
+  <App />,
   document.getElementById("root")
 );
