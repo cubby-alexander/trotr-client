@@ -1,13 +1,12 @@
 import React from "react";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 
 import {makeStyles} from "@material-ui/core/styles";
 
 import Button from "../CustomButtons/Button";
-import Assignment from "@material-ui/icons/Assignment";
 import Dialog from "@material-ui/core/Dialog";
-import Card from "../../Card/Card";
+import Card from "../Card/Card";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Close from "@material-ui/icons/Close";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -38,8 +37,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 Transition.displayName = "Transition";
 
-export default function SignupModal() {
-    const [signupModal, setSignupModal] = useState(false);
+export default function SignupModal({ isOpen: parentSignupModal, isOpenChange }) {
+    const [isOpen, setIsOpen] = useState(parentSignupModal);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -53,6 +52,22 @@ export default function SignupModal() {
     const [errorMessages, setErrorMessages] = useState([]);
 
     const classes = useStyles();
+
+    const closeModal = (change) => {
+        setIsOpen(false);
+        let changePacket = {
+            modal: "signup",
+            newState: "closed",
+        };
+        if (change === "open signin") {
+            changePacket.followup = change
+        }
+        isOpenChange(changePacket);
+    }
+
+    useEffect(() => {
+        setIsOpen(parentSignupModal);
+    }, [parentSignupModal]);
 
     const handleToggle = value => {
         const currentIndex = checked.indexOf(value);
@@ -113,27 +128,16 @@ export default function SignupModal() {
 
     return (
         <div>
-            <Button
-                color="primary"
-                target="_blank"
-                className={classes.navButton}
-                round
-                block
-                onClick={() => setSignupModal(true)}
-            >
-                <Assignment /> Signup
-            </Button>
-
             {/* SIGNUP MODAL START */}
             <Dialog
                 classes={{
                     root: classes.modalRoot,
                     paper: classes.modal + " " + classes.modalSignup
                 }}
-                open={signupModal}
+                open={isOpen}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={() => setSignupModal(false)}
+                onClose={() => closeModal()}
                 aria-labelledby="signup-modal-slide-title"
                 aria-describedby="signup-modal-slide-description"
             >
@@ -148,7 +152,7 @@ export default function SignupModal() {
                             className={classes.modalCloseButton}
                             key="close"
                             aria-label="Close"
-                            onClick={() => setSignupModal(false)}
+                            onClick={() => closeModal()}
                         >
                             {" "}
                             <Close className={classes.modalClose} />
@@ -216,8 +220,8 @@ export default function SignupModal() {
                                 className={classes.mrAuto}
                             >
                                     <div className={classes.textCenter}>
-                                    <h4 className={classes.socialTitle}>
-                                    Account Information
+                                    <h4 className={classes.socialTitle} onClick={() => closeModal("open signin")}>
+                                    Already have an account? Sign in here
                                     </h4>
                                     </div>
                                 <form className={classes.form}>

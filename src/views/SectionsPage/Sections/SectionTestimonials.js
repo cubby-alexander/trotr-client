@@ -9,10 +9,10 @@ import Star from "@material-ui/icons/Star";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CardAvatar from "components/Card/CardAvatar.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
+import CardFooter from "components/appComponents/Card/CardFooter.js";
+import CardAvatar from "components/appComponents/Card/CardAvatar.js";
 import Muted from "components/Typography/Muted.js";
 import Warning from "components/Typography/Warning.js";
 

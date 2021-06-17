@@ -8,7 +8,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
+import Card from "components/appComponents/Card/Card.js";
 
 import carouselStyle from "assets/jss/material-kit-pro-react/views/componentsSections/carouselStyle.js";
 

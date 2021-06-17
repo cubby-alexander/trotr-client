@@ -17,9 +17,9 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
+import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";

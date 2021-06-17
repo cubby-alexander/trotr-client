@@ -56,8 +56,8 @@ const drawerWidth = 260;
 
 const primaryColor = [
   "#004643",
-  "#ab47bc",
-  "#8e24aa",
+  "#abd1c6",
+  "#29827d",
   "#af2cc5",
   "#e1bee7",
   "#ba68c8"
@@ -286,7 +286,7 @@ const infoCardHeader = {
 const primaryCardHeader = {
   color: whiteColor,
   background:
-    "linear-gradient(60deg, " + primaryColor[1] + ", " + primaryColor[2] + ")",
+    "linear-gradient(60deg, " + primaryColor[0] + ", " + primaryColor[2] + ")",
   ...primaryBoxShadow
 };
 const roseCardHeader = {

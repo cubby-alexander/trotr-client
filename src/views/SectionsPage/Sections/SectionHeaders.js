@@ -15,8 +15,8 @@ import Header from "components/appComponents/Header/Header.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 
 import headersStyle from "assets/jss/material-kit-pro-react/views/sectionsSections/headersStyle.js";

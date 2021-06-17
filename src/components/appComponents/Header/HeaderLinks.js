@@ -49,6 +49,8 @@ import SignupModal from "../Signup/SignupModal";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  const [signupModal, setSignupModal] = React.useState(false);
+  const [loginModal, setLoginModal] = React.useState(false);
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -86,7 +88,19 @@ export default function HeaderLinks(props) {
     };
     animateScroll();
   };
-  var onClickSections = {};
+  const changeState = (newState) => {
+    if (newState.modal === "signup") {
+      setSignupModal(false);
+    }
+    if (newState.modal === "login") {
+      setLoginModal(false);
+    }
+    if (newState.followup === "open signin") {
+      setLoginModal(true);
+    }
+  }
+
+  console.log(loginModal);
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
@@ -122,6 +136,7 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
+
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -192,6 +207,7 @@ export default function HeaderLinks(props) {
             </Link>
           ]}
         />
+
       </ListItem>
       <ListItem className={classes.listItem}>
         <CustomDropdown
@@ -247,12 +263,31 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
+
       <ListItem className={classes.listItem}>
-        <LoginModal />
+        <Button
+            block
+            round
+            onClick={() => setLoginModal(!loginModal)}
+            color="transparent"
+            className={classes.navLink}
+        >
+          <AccountCircle /> Login
+        </Button>
+        <LoginModal isOpen={loginModal} isOpenChange={(newState) => changeState(newState)} />
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <SignupModal />
+        <Button
+            color="primary"
+            target="_blank"
+            block
+            className={classes.navLink}
+            onClick={() => setSignupModal(!signupModal)}
+        >
+          <Assignment /> Signup
+        </Button>
+        <SignupModal isOpen={signupModal} isOpenChange={(newState) => changeState(newState)} />
       </ListItem>
     </List>
   );

@@ -4,10 +4,10 @@ import classNames from "classnames";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
-import CardFooter from "components/Card/CardFooter.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardHeader from "components/appComponents/Card/CardHeader.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
+import CardFooter from "components/appComponents/Card/CardFooter.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";

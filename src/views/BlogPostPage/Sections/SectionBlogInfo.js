@@ -7,8 +7,8 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Badge from "components/Badge/Badge.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardAvatar from "components/Card/CardAvatar.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardAvatar from "components/appComponents/Card/CardAvatar.js";
 
 import profileImage from "assets/img/faces/card-profile1-square.jpg";
 

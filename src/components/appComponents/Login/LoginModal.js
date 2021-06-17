@@ -1,10 +1,10 @@
-import Card from "../../Card/Card";
+import Card from "../Card/Card";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import CardHeader from "../../Card/CardHeader";
+import CardHeader from "../Card/CardHeader";
 import Button from "../CustomButtons/Button";
 import Close from "@material-ui/icons/Close";
 import DialogContent from "@material-ui/core/DialogContent";
-import CardBody from "../../Card/CardBody";
+import CardBody from "../Card/CardBody";
 import CustomInput from "../CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Face from "@material-ui/icons/Face";
@@ -12,7 +12,7 @@ import Mail from "@material-ui/icons/Mail";
 import Icon from "@material-ui/core/Icon";
 import DialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import axios from "axios";
 import Slide from "@material-ui/core/Slide";
@@ -28,11 +28,24 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 Transition.displayName = "Transition";
 
-export default function LoginModal() {
-    const [loginModal, setLoginModal] = useState(false);
+export default function LoginModal({ isOpen: parentLoginModal, isOpenChange }) {
+    const props = { props };
+    const [isOpen, setIsOpen] = useState(parentLoginModal);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const classes = useStyles();
+
+    const closeModal = () => {
+        setIsOpen(false);
+        isOpenChange({
+            modal: "login",
+            newState: "closed",
+        });
+    }
+
+    useEffect(() => {
+        setIsOpen(parentLoginModal);
+    }, [parentLoginModal]);
 
     const login = () => {
         console.log("Axios")
@@ -50,74 +63,19 @@ export default function LoginModal() {
 
     return (
         <div>
-            <Button block
-                    round
-                    onClick={() => setLoginModal(true)}
-                    color="transparent"
-            >
-                <AccountCircle /> Login
-            </Button>
             <Dialog
                 classes={{
                     root: classes.modalRoot,
                     paper: classes.modal + " " + classes.modalLogin
                 }}
-                open={loginModal}
+                open={isOpen}
                 TransitionComponent={Transition}
                 keepMounted
-                onClose={() => setLoginModal(false)}
+                onClose={() => closeModal()}
                 aria-labelledby="login-modal-slide-title"
                 aria-describedby="login-modal-slide-description"
             >
                 <Card plain className={classes.modalLoginCard}>
-                    <DialogTitle
-                        id="login-modal-slide-title"
-                        disableTypography
-                        className={classes.modalHeader}
-                    >
-                        <CardHeader
-                            plain
-                            color="primary"
-                            className={
-                                classes.textCenter + " " + classes.cardLoginHeader
-                            }
-                        >
-                            <Button
-                                simple
-                                className={classes.modalCloseButton}
-                                key="close"
-                                aria-label="Close"
-                                onClick={() => setLoginModal(false)}
-                            >
-                                {" "}
-                                <Close className={classes.modalClose} />
-                            </Button>
-                            <h5 className={classes.cardTitleWhite}>Log in</h5>
-                            <div className={classes.socialLine}>
-                                <Button
-                                    justIcon
-                                    link
-                                    className={classes.socialLineButton}
-                                >
-                                    <i className="fab fa-facebook-square" />
-                                </Button>
-                                <Button
-                                    justIcon
-                                    link
-                                    className={classes.socialLineButton}
-                                >
-                                    <i className="fab fa-twitter" />
-                                </Button>
-                                <Button
-                                    justIcon
-                                    link
-                                    className={classes.socialLineButton}
-                                >
-                                    <i className="fab fa-google-plus-g" />
-                                </Button>
-                            </div>
-                        </CardHeader>
-                    </DialogTitle>
                     <DialogContent
                         id="login-modal-slide-description"
                         className={classes.modalBody}
@@ -171,8 +129,13 @@ export default function LoginModal() {
                             classes.modalFooter + " " + classes.justifyContentCenter
                         }
                     >
-                        <Button color="primary" simple size="lg" onClick={login()}>
-                            Get started
+                        <Button
+                            color="primary"
+                            round
+                            size="md"
+                            onClick={() => login()}
+                        >
+                            Log In
                         </Button>
                     </DialogActions>
                 </Card>

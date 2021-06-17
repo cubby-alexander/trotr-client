@@ -8,8 +8,8 @@ import FormatAlignLeft from "@material-ui/icons/FormatAlignLeft";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 
 import office2 from "assets/img/examples/office2.jpg";

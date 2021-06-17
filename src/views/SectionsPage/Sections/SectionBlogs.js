@@ -6,9 +6,9 @@ import TrendingUp from "@material-ui/icons/TrendingUp";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
+import CardHeader from "components/appComponents/Card/CardHeader.js";
 import Info from "components/Typography/Info.js";
 import Danger from "components/Typography/Danger.js";
 import Success from "components/Typography/Success.js";

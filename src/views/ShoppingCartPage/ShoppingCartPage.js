@@ -22,8 +22,8 @@ import GridItem from "components/Grid/GridItem.js";
 import Footer from "components/Footer/Footer.js";
 import Table from "components/Table/Table.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
+import Card from "components/appComponents/Card/Card.js";
+import CardBody from "components/appComponents/Card/CardBody.js";
 
 import shoppingCartStyle from "assets/jss/material-kit-pro-react/views/shoppingCartStyle.js";
 
