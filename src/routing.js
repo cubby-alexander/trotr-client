@@ -5,7 +5,7 @@ import ComponentsPage from "./views/ComponentsPage/ComponentsPage";
 import ContactUsPage from "./views/ContactUsPage/ContactUsPage";
 import EcommercePage from "./views/EcommercePage/EcommercePage";
 import LandingPage from "./views/LandingPage/LandingPage";
-import LoginPage from "./views/LoginPage/LoginPage";
+import LoginPage from "./views/appViews/LoginPage/LoginPage";
 import PricingPage from "./views/PricingPage/PricingPage";
 import Profile from "./views/appViews/ProfilePage/ProfilePage";
 import ProfilePage from "./views/ProfilePage/ProfilePage";
@@ -35,7 +35,7 @@ export default function Routing(props) {
             <Route path="/landing-page" component={LandingPage} />
             <Route path="/login-page" component={LoginPage} />
             <Route path="/pricing" component={PricingPage} />
-            <Route path="/profile" component={Profile} />
+            <Route path="/user/:id" component={Profile} />
             <Route path="/profile-page" component={ProfilePage} />
             <Route path="/product-page" component={ProductPage} />
             <Route path="/sections" component={SectionsPage} />

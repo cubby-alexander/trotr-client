@@ -47,7 +47,8 @@ import ImageUpload from "../../../components/CustomUpload/ImageUpload";
 
 const useStyles = makeStyles(profilePageStyle);
 
-export default function ProfilePage({ ...rest }) {
+export default function ProfilePage(props, { ...rest }) {
+
   const [avatar, setAvatar] = React.useState('');
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,6 +65,11 @@ export default function ProfilePage({ ...rest }) {
   const changeAvatar = (file) => {
     setAvatar(file);
   }
+
+  console.log(props);
+
+  axios.get(`http://localhost:3000/user/${props.match.params.id}`).then(res => console.log(res))
+      .catch(err => console.log(err))
 
   const fireAxios = () => {
     console.log("Axios");

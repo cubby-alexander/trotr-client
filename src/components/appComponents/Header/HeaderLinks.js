@@ -265,15 +265,16 @@ export default function HeaderLinks(props) {
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <Button
+        <Link to={'/login-page'} className={classes.dropdownLink}>
+          <Button
             block
             round
-            onClick={() => setLoginModal(!loginModal)}
             color="transparent"
             className={classes.navLink}
-        >
+          >
           <AccountCircle /> Login
-        </Button>
+          </Button>
+        </Link>
         <LoginModal isOpen={loginModal} isOpenChange={(newState) => changeState(newState)} />
       </ListItem>
 

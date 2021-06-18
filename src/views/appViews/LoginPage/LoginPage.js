@@ -1,5 +1,10 @@
 /*eslint-disable*/
-import React from "react";
+import React, {useContext} from "react";
+import {useState} from "react";
+import {useHistory} from "react-router-dom";
+import {useCookies} from "react-cookie";
+import ApplicationContext from "../../../ApplicationContext";
+import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -11,8 +16,6 @@ import Email from "@material-ui/icons/Email";
 import Favorite from "@material-ui/icons/Favorite";
 import Face from "@material-ui/icons/Face";
 // core components
-import Header from "components/appComponents/Header/Header.js";
-import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -21,27 +24,55 @@ import Card from "components/appComponents/Card/Card.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
+import {Link} from "react-router-dom";
 
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
+import SnackbarContent from "../../../components/Snackbar/SnackbarContent";
 
 const useStyles = makeStyles(loginPageStyle);
 
 export default function LoginPage() {
+  const authenticationContext = useContext(ApplicationContext);
+  const [cookies, setCookies] = useCookies('jwt');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  const history = useHistory();
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  const attemptLogin = () => {
+    let axiosConfig = {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+    };
+    let user = {
+      email,
+      password
+    };
+    console.log(user);
+    axios.post("http://localhost:3000/user/login", user, axiosConfig)
+        .then((res) => {
+          history.push(`/user/${res.data._id}`);
+          console.log(res);
+        })
+        .catch((err) => console.log(err))
+  }
+
+  const passwordKeyed = event => {
+    console.log(event.key);
+    if (event.key === "Enter") {
+      attemptLogin();
+    }
+  }
+
   return (
-    <div>
-      <Header
-        absolute
-        color="transparent"
-        brand="Material Kit PRO React"
-        links={<HeaderLinks dropdownHoverColor="info" />}
-      />
       <div
         className={classes.pageHeader}
         style={{
@@ -60,53 +91,11 @@ export default function LoginPage() {
                     signup
                     className={classes.cardHeader}
                   >
-                    <h4 className={classes.cardTitle}>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-facebook" />
-                      </Button>
-                      <Button
-                        justIcon
-                        color="transparent"
-                        className={classes.iconButtons}
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className="fab fa-google-plus-g" />
-                      </Button>
-                    </div>
+                    <Link to="/">
+                      <img src="/logo.png" alt="Logo" className={classes.logo} />
+                    </Link>
                   </CardHeader>
-                  <p className={classes.description + " " + classes.textCenter}>
-                    Or Be Classical
-                  </p>
                   <CardBody signup>
-                    <CustomInput
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "First Name...",
-                        type: "text",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Face className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
                     <CustomInput
                       id="email"
                       formControlProps={{
@@ -119,7 +108,8 @@ export default function LoginPage() {
                           <InputAdornment position="start">
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
-                        )
+                        ),
+                        onChange: (e) => setEmail(e.target.value)
                       }}
                     />
                     <CustomInput
@@ -137,14 +127,30 @@ export default function LoginPage() {
                             </Icon>
                           </InputAdornment>
                         ),
-                        autoComplete: "off"
+                        autoComplete: "off",
+                        onChange: (e) => setPassword(e.target.value),
+                        onKeyPress: (e) => passwordKeyed(e)
                       }}
                     />
                   </CardBody>
                   <div className={classes.textCenter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
+                    <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={() => attemptLogin()}
+                    >
+                      Log In
                     </Button>
+
+                    {displayError ? <SnackbarContent
+                        message={
+                          <span>Incorrect username or password.</span>
+                        }
+                        close
+                        color="danger"
+                        icon="info_outline"
+                    /> : ""}
                   </div>
                 </form>
               </Card>
@@ -209,6 +215,5 @@ export default function LoginPage() {
           }
         />
       </div>
-    </div>
   );
 }

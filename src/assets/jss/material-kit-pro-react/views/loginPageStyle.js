@@ -116,7 +116,10 @@ const signupPageStyle = theme => ({
     bottom: "0",
     color: whiteColor,
     zIndex: "2"
-  }
+  },
+  logo: {
+    maxHeight: "50px",
+  },
 });
 
 export default signupPageStyle;
