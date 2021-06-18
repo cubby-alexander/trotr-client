@@ -199,7 +199,29 @@ const headerLinksStyle = theme => ({
     MsFlexAlign: "center",
     alignItems: "center"
   },
-  mlAuto
+  mlAuto,
+  accountInfo: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: "0 15px"
+  },
+  accountBtns: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  avatarHolder: {
+    height: "40px",
+    width: "40px",
+    margin: "5px",
+  },
+  acctAvatar: {
+    height: "40px",
+    width: "40px",
+    borderRadius: "50%",
+    objectFit: "cover"
+  }
 });
 
 export default headerLinksStyle;

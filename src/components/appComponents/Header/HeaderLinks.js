@@ -1,5 +1,8 @@
 /* eslint-disable */
 import React from "react";
+import {useState, useContext} from "react";
+import {useHistory} from "react-router-dom";
+import ApplicationContext from "../../../ApplicationContext";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -30,6 +33,7 @@ import ViewQuilt from "@material-ui/icons/ViewQuilt";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import AttachMoney from "@material-ui/icons/AttachMoney";
+import {ExitToApp} from "@material-ui/icons";
 import Store from "@material-ui/icons/Store";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import PersonAdd from "@material-ui/icons/PersonAdd";
@@ -49,8 +53,11 @@ import SignupModal from "../Signup/SignupModal";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const [signupModal, setSignupModal] = React.useState(false);
-  const [loginModal, setLoginModal] = React.useState(false);
+  const [signupModal, setSignupModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const context = useContext(ApplicationContext);
+  const history = useHistory();
+
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;
@@ -264,32 +271,61 @@ export default function HeaderLinks(props) {
         />
       </ListItem>
 
-      <ListItem className={classes.listItem}>
-        <Link to={'/login-page'} className={classes.dropdownLink}>
-          <Button
-            block
-            round
-            color="transparent"
-            className={classes.navLink}
-          >
-          <AccountCircle /> Login
-          </Button>
-        </Link>
-        <LoginModal isOpen={loginModal} isOpenChange={(newState) => changeState(newState)} />
-      </ListItem>
+      {context.hasOwnProperty("authentication") ?
+            <div className={classes.acctBtns}>
+            <ListItem className={classes.listItem}>
+              <div className={classes.accountInfo}>
+                <div className={classes.avatarHolder}>
+                  <img src={context.authentication.avatar} className={classes.acctAvatar}/>
+                </div>
+                {context.authentication.name}
+              </div>
+            </ListItem>
 
-      <ListItem className={classes.listItem}>
-        <Button
-            color="primary"
-            target="_blank"
-            block
-            className={classes.navLink}
-            onClick={() => setSignupModal(!signupModal)}
-        >
-          <Assignment /> Signup
-        </Button>
-        <SignupModal isOpen={signupModal} isOpenChange={(newState) => changeState(newState)} />
-      </ListItem>
+            <ListItem className={classes.listItem}>
+              <Button
+                  color="transparent"
+                  target="_blank"
+                  block
+                  className={classes.navLink}
+                  onClick={() => {
+                    history.push('/');
+                    delete context.authentication;
+                  }}
+              >
+                <ExitToApp /> Logout
+              </Button>
+            </ListItem>
+          </div>
+          :
+          <div className={classes.accountBtns}>
+            <ListItem className={classes.listItem}>
+              <Link to={'/login-page'} className={classes.dropdownLink}>
+                <Button
+                    block
+                    round
+                    color="transparent"
+                    className={classes.navLink}
+                >
+                  <AccountCircle/> Login
+                </Button>
+              </Link>
+              <LoginModal isOpen={loginModal} isOpenChange={(newState) => changeState(newState)}/>
+            </ListItem>
+
+            <ListItem className={classes.listItem}>
+              <Button
+              color="primary"
+              target="_blank"
+              block
+              className={classes.navLink}
+              onClick={() => setSignupModal(!signupModal)}
+              >
+                <Assignment /> Signup
+              </Button>
+              <SignupModal isOpen={signupModal} isOpenChange={(newState) => changeState(newState)} />
+            </ListItem>
+          </div>}
     </List>
   );
 }

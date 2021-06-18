@@ -34,7 +34,7 @@ import SnackbarContent from "../../../components/Snackbar/SnackbarContent";
 const useStyles = makeStyles(loginPageStyle);
 
 export default function LoginPage() {
-  const authenticationContext = useContext(ApplicationContext);
+  const context = useContext(ApplicationContext);
   const [cookies, setCookies] = useCookies('jwt');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +46,8 @@ export default function LoginPage() {
     document.body.scrollTop = 0;
   });
   const classes = useStyles();
+
+  console.log(context);
 
   const attemptLogin = () => {
     let axiosConfig = {
@@ -59,6 +61,12 @@ export default function LoginPage() {
     console.log(user);
     axios.post("http://localhost:3000/user/login", user, axiosConfig)
         .then((res) => {
+          context.authentication = {
+            id: res.data._id,
+            name: res.data.name,
+            email: res.data.email,
+            avatar: res.data.avatar
+          }
           history.push(`/user/${res.data._id}`);
           console.log(res);
         })
