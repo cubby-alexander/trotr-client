@@ -19,7 +19,7 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import NavPills from "components/NavPills/NavPills.js";
+import NavPills from "components/appComponents/NavPills/NavPills.js";
 import Card from "components/appComponents/Card/Card.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import CardHeader from "components/appComponents/Card/CardHeader.js";

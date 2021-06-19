@@ -26,7 +26,7 @@ import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import {Link} from "react-router-dom";
 
-import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.js";
+import loginPageStyle from "./loginPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
 import SnackbarContent from "../../../components/Snackbar/SnackbarContent";

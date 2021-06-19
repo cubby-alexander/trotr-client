@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import Button from "components/appComponents/CustomButtons/Button.js";
 
 import defaultImage from "assets/img/image_placeholder.jpg";
-import defaultAvatar from "assets/img/placeholder.jpg";
+import defaultAvatar from "assets/img/appImages/placeholder.jpg";
 
 export default function ImageUpload(props) {
   const [file, setFile] = React.useState(null);
@@ -41,6 +41,7 @@ export default function ImageUpload(props) {
     setFile(null);
     setImagePreviewUrl(props.avatar ? defaultAvatar : defaultImage);
     fileInput.current.value = null;
+    props.restoreDefault();
   };
   let { avatar, addButtonProps, changeButtonProps, removeButtonProps } = props;
   return (

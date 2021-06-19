@@ -15,7 +15,7 @@ import Card from "components/appComponents/Card/Card.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import CardFooter from "components/appComponents/Card/CardFooter.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import NavPills from "components/NavPills/NavPills.js";
+import NavPills from "components/appComponents/NavPills/NavPills.js";
 import Success from "components/Typography/Success.js";
 import Danger from "components/Typography/Danger.js";
 

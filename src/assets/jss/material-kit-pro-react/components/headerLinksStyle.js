@@ -200,7 +200,7 @@ const headerLinksStyle = theme => ({
     alignItems: "center"
   },
   mlAuto,
-  accountInfo: {
+  accountLink: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -220,7 +220,8 @@ const headerLinksStyle = theme => ({
     height: "40px",
     width: "40px",
     borderRadius: "50%",
-    objectFit: "cover"
+    objectFit: "cover",
+    boxShadow: "0px 0px 2px #001e1d"
   }
 });
 

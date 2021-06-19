@@ -14,8 +14,11 @@ import GridContainer from "../../Grid/GridContainer";
 import GridItem from "../../Grid/GridItem";
 import InfoArea from "../../InfoArea/InfoArea";
 import Timeline from "@material-ui/icons/Timeline";
+import {DateRange} from "@material-ui/icons"; // Calendar
+import {Event} from "@material-ui/icons"; // Engagements
+import {FlightTakeoff} from "@material-ui/icons"; // New Trip
 import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
+import Group from "@material-ui/icons/Group"; // Friends
 import CustomInput from "../CustomInput/CustomInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Face from "@material-ui/icons/Face";

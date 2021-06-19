@@ -65,5 +65,5 @@ InfoArea.propTypes = {
     "gray"
   ]),
   vertical: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
 };

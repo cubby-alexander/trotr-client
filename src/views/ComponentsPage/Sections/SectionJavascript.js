@@ -44,7 +44,7 @@ import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomFileInput from "components/CustomFileInput/CustomFileInput.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import Accordion from "components/Accordion/Accordion.js";
-import ImageUpload from "components/CustomUpload/ImageUpload.js";
+import ImageUpload from "components/appComponents/CustomUpload/ImageUpload.js";
 
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.js";
 

@@ -272,14 +272,19 @@ export default function HeaderLinks(props) {
       </ListItem>
 
       {context.hasOwnProperty("authentication") ?
-            <div className={classes.acctBtns}>
+            <div className={classes.accountBtns}>
             <ListItem className={classes.listItem}>
-              <div className={classes.accountInfo}>
+              <Button
+                  color="transparent"
+                  block
+                  className={classes.accountLink}
+                  onClick={() => history.push(`/user/${context.authentication._id}`)}
+              >
                 <div className={classes.avatarHolder}>
                   <img src={context.authentication.avatar} className={classes.acctAvatar}/>
                 </div>
                 {context.authentication.name}
-              </div>
+              </Button>
             </ListItem>
 
             <ListItem className={classes.listItem}>
@@ -287,7 +292,7 @@ export default function HeaderLinks(props) {
                   color="transparent"
                   target="_blank"
                   block
-                  className={classes.navLink}
+                  className={classes.accountLink}
                   onClick={() => {
                     history.push('/');
                     delete context.authentication;
@@ -315,7 +320,7 @@ export default function HeaderLinks(props) {
 
             <ListItem className={classes.listItem}>
               <Button
-              color="primary"
+              color="warning"
               target="_blank"
               block
               className={classes.navLink}

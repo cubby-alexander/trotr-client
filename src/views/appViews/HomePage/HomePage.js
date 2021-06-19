@@ -1,4 +1,6 @@
-/*eslint-disable*/ import React from "react";
+/*eslint-disable*/
+import React from "react";
+import {useHistory} from "react-router-dom";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // nodejs library that concatenates classes
@@ -28,11 +30,15 @@ import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPag
 const useStyles = makeStyles(landingPageStyle);
 
 export default function LandingPage({ ...rest }) {
-  React.useEffect(() => {
+
+    const history = useHistory();
+    const classes = useStyles();
+
+    React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-  });
-  const classes = useStyles();
+    });
+
   return (
     <div>
       <Header
@@ -58,10 +64,10 @@ export default function LandingPage({ ...rest }) {
               </h4>
               <br />
               <Button
-                color="primary"
+                color="danger"
                 size="lg"
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
                 target="_blank"
+                onClick={() => history.push('/login-page')}
               >
                 <i className="fas fa-play" />
                 Watch video

@@ -70,7 +70,7 @@ const infoStyle = {
   iconVertical: {
     width: "61px",
     height: "61px"
-  }
+  },
 };
 
 export default infoStyle;

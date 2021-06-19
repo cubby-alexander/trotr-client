@@ -11,7 +11,7 @@ import List from "@material-ui/icons/List";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import NavPills from "components/NavPills/NavPills.js";
+import NavPills from "components/appComponents/NavPills/NavPills.js";
 import pillsStyle from "assets/jss/material-kit-pro-react/views/componentsSections/pillsStyle.js";
 
 const useStyles = makeStyles(pillsStyle);

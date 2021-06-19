@@ -105,8 +105,8 @@ const buttonStyle = {
     width: "100%"
   },
   primary: {
-    color: "#001e1d",
-    backgroundColor: warningColor[0],
+    color: whiteColor,
+    backgroundColor: primaryColor[0],
     boxShadow:
       "0 2px 2px 0 rgba(" +
       hexToRgb(warningColor[0]) +
@@ -129,8 +129,8 @@ const buttonStyle = {
     }
   },
   secondary: {
-    color: "rgba(" + hexToRgb(blackColor) + ",.87)",
-    backgroundColor: secondaryColor[0],
+    color: secondaryColor[0],
+    backgroundColor: secondaryColor[1],
     boxShadow:
       "0 2px 2px 0 rgba(" +
       hexToRgb(secondaryColor[0]) +
@@ -197,6 +197,7 @@ const buttonStyle = {
     }
   },
   warning: {
+    color: "#001e1d",
     backgroundColor: warningColor[0],
     boxShadow:
       "0 2px 2px 0 rgba(" +
@@ -207,6 +208,7 @@ const buttonStyle = {
       hexToRgb(warningColor[0]) +
       ", 0.12)",
     "&:hover,&:focus": {
+      color: "#001e1d",
       backgroundColor: warningColor[0],
       boxShadow:
         "0 14px 26px -12px rgba(" +
