@@ -176,6 +176,9 @@ const profilePageStyle = {
   },
   setupButton: {
     margin: "20px 5px"
+  },
+  mapContainer: {
+    position: "relative"
   }
 };
 

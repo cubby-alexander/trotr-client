@@ -8,7 +8,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import GridContainer from "../../../../components/Grid/GridContainer";
 import GridItem from "../../../../components/Grid/GridItem";
 import ImageUpload from "../../../../components/appComponents/CustomUpload/ImageUpload";
-import Map from "../../../../components/appComponents/Map/Map";
 
 import styles from "../profilePageStyle";
 import InfoArea from "../../../../components/InfoArea/InfoArea";
@@ -38,6 +37,7 @@ export default function SetUpForms(props) {
     const [sleepEnd, setSeleepEnd] = useState(0);
     const [workStart, setWorkStart] = useState(0);
     const [workEnd, setWorkEnd] = useState(0);
+    const [areaSet, setAreaSet] = useState(false);
 
     const logout = () => {
         delete context.authentication;
@@ -92,39 +92,19 @@ export default function SetUpForms(props) {
             }
         };
         let userUpdate = {
+            phone,
             domestic: {
                 lat,
                 lng,
-                domesticFence: socialFence,
-                sleepStart: sleepStart,
-                sleepEnd: sleepEnd,
-                workStart: workStart,
-                workEnd: workEnd,
+                social_fence: socialFence,
+                sleep_start: sleepStart,
+                sleep_end: sleepEnd,
+                work_start: workStart,
+                work_end: workEnd,
             }
         };
-        let data = new FormData();
-        for (const key of Object.keys(userUpdate)) {
-            console.log("appending ", key, userUpdate[key])
-            if (key === 'domestic') {
-                data.append(key, {})
-                // append nested object
-                for (let domesticKey in userUpdate[key]) {
-                    data.append(`domestic[${domesticKey}]`, userUpdate[key][domesticKey]);
-                }
-            } else {
-                data.append(key, userUpdate[key])
-            }
-        }
-        console.log(data);
-        data.append("avatar", avatar);
-        for (var key of data.keys()) {
-            console.log(key);
-        }
-        for (var value of data.values()) {
-            console.log(value);
-        }
         axios
-            .put(`http://localhost:3000/user/${context.authentication.id}`, data, axiosConfig)
+            .put(`http://localhost:3000/user/${context.authentication.id}`, userUpdate, axiosConfig)
             .then((res) => console.log(res.data, "This from Axios"))
             .catch(err => console.log(err))
     }
@@ -210,39 +190,66 @@ export default function SetUpForms(props) {
                                         onChange={(file) => setAvatar(file)}
                                         restoreDefault={(e) => setAvatar("https://res.cloudinary.com/djipxounx/image/upload/v1624115513/placeholder_bgwuxw.jpg")}
                                     />
-                                    <div className={classes.section}>
+                                </div>
+                            </GridItem>
+                        </GridContainer>
+                    )}
+                    {(formStage === 5) && (
+                        <GridContainer justify="center">
+                            <GridItem xs={12} sm={8} md={3}>
+                                <div className={classes.setupForms}>
+                                    {areaSet ?
+                                        <div>
+                                            <h4>Set Your Social Fence</h4>
+                                            <p>If a friend were visiting from far away for a few days, how far would you
+                                                travel to connect with them? That's a "social fence."</p>
 
-                                        <h4>Set Contact Information</h4>
-                                        <CustomInput
-                                            id="phone"
-                                            formControlProps={{
-                                                fullWidth: true,
-                                                className: classes.input,
-                                            }}
-                                            inputProps={{
-                                                placeholder: "Phone Number...",
-                                                type: "text",
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <Email className={classes.inputIconsColor} />
-                                                    </InputAdornment>
-                                                ),
-                                                onChange: (e) => setPhone(e.target.value)
-                                            }}
-                                        />
-                                    </div>
+                                            <br />
+                                            <p>Trotr uses your social fence to find overlapping availability when you or your
+                                                friends are travelling, moving, or just looking for someone to spend an afternoon with.</p>
+                                            <br />
+                                            <p>Drag the edges of the circle on the map below to set a social fence that is
+                                                appropriate for you.</p>
+                                        </div>
+                                        :
+                                        <div>
+                                            <h4>Set Your Residential Area</h4>
+                                            <p>Use the search bar on the map below to select the city or town you live in.</p>
+                                        </div>
+                                            }
+                                    <SearchBox
+                                        onAreaSet={() => setAreaSet(true)}
+                                        onAreaReset={() => setAreaSet(false)}
+                                        setLatLng={(coordinates) => {
+                                            setLat(coordinates.lat);
+                                            setLng(coordinates.lng)
+                                        }}
+                                        setRadius={(radius) => {setSocialFence(radius)}}
+                                    />
                                 </div>
                             </GridItem>
                         </GridContainer>
                     )}
                     {(formStage === 2) && (
                         <GridContainer justify="center">
-                            <SearchBox />
-                        </GridContainer>
-                    )}
-                    {(formStage === 3) && (
-                        <GridContainer justify="center">
-                            Step 3
+                                <h4>Set Contact Information</h4>
+                                <CustomInput
+                                    id="phone"
+                                    formControlProps={{
+                                        fullWidth: true,
+                                        className: classes.input,
+                                    }}
+                                    inputProps={{
+                                        placeholder: "Phone Number...",
+                                        type: "text",
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <Email className={classes.inputIconsColor} />
+                                            </InputAdornment>
+                                        ),
+                                        onChange: (e) => setPhone(e.target.value)
+                                    }}
+                                />
                         </GridContainer>
                     )}
                     {formStage > 0 && <ProgressBar

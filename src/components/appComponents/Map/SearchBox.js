@@ -1,26 +1,63 @@
 import React from "react";
+import {useState, useRef} from "react";
 import {GoogleMap, StandaloneSearchBox} from '@react-google-maps/api';
 import { Circle } from '@react-google-maps/api';
 import {LoadScript} from "@react-google-maps/api";
 
 const containerStyle = {
     height: "400px",
-    width: "400px"
+    width: "400px",
+    position: "relative",
+    margin: "20px auto",
 };
 
-const center = {
-    lat: 37.09024,
-    lng: -95.712891
-};
+export default function SearchBox(props) {
+    const radiusRef = useRef(null);
+    const [displaySearch, setDisplaySearch] = useState(true);
+    const [center, setCenter] = useState({
+            lat: 37.09024,
+            lng: -95.712891
+        });
+    const [socialFence, setSocialFence] = useState(false);
+    const [radius, setRadius] = useState(10000);
+    const [zoom, setZoom] = useState(3);
 
-export default function SearchBox() {
     let searchBox;
-    const onLoad = (ref) => searchBox = ref;
-
-    const onPlacesChanged = () => {
+    const onSearchLoad = (ref) => searchBox = ref;
+    const onPlacesChanged = (ref) => {
+        console.log(searchBox);
         let newPlace = searchBox.getPlaces();
-        console.log(newPlace[0].geometry.location.lat(), newPlace[0].geometry.location.lng());
+        setCenter({
+            lat: newPlace[0].geometry.location.lat(),
+            lng: newPlace[0].geometry.location.lng()
+        });
+        setZoom(10);
+        setSocialFence({
+            lat: newPlace[0].geometry.location.lat(),
+            lng: newPlace[0].geometry.location.lng()
+        });
     };
+
+    let circle;
+    const onCircleLoad = (ref) => {
+        circle = ref;
+        console.log(circle);
+        setDisplaySearch(false);
+        props.onAreaSet();
+        props.setLatLng(socialFence);
+    };
+
+    const onCenterChanged = () => {
+        if (circle !== undefined) {
+            console.log(circle)
+        }
+    }
+
+    const onRadiusChanged = () => {
+        if (radiusRef.current === null) {return}
+        setRadius(radiusRef.current.state.circle.radius);
+        props.setRadius(radiusRef.current.state.circle.radius)
+    }
 
     return (
         <LoadScript
@@ -30,7 +67,7 @@ export default function SearchBox() {
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={center}
-                zoom={3}
+                zoom={zoom}
                 clickableIcons={false}
                 options={{
                     streetView: false,
@@ -39,8 +76,8 @@ export default function SearchBox() {
                     fullscreenControl: false,
                 }}
             >
-                <StandaloneSearchBox
-                    onLoad={onLoad}
+                {displaySearch && <StandaloneSearchBox
+                    onLoad={onSearchLoad}
                     onPlacesChanged={onPlacesChanged}
                 >
                     <input
@@ -63,8 +100,26 @@ export default function SearchBox() {
                             marginLeft: "-120px"
                         }}
                     />
-                </StandaloneSearchBox>
-                <></>
+                </StandaloneSearchBox>}
+                {socialFence && (
+                    <Circle
+                        ref={radiusRef}
+                        center={socialFence}
+                        radius={radius}
+                        editable={true}
+                        draggable={false}
+                        onLoad={onCircleLoad}
+                        onCenterChanged={onCenterChanged}
+                        onRadiusChanged={onRadiusChanged}
+                        options={{
+                            strokeColor: "#004643",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 1,
+                            fillColor: "#004643",
+                            fillOpacity: 0.3,
+                        }}
+                    />
+                )}
             </GoogleMap>
 
         </LoadScript>
