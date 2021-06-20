@@ -83,7 +83,7 @@ export default function LandingPage({ ...rest }) {
       {/*    <SectionWork />*/}
       {/*  </div>*/}
       {/*</div>*/}
-      {/*<Footer*/}
+      {/*<RecurringFooter*/}
       {/*  content={*/}
       {/*    <div>*/}
       {/*      <div className={classes.left}>*/}

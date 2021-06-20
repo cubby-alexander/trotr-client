@@ -11,12 +11,15 @@ import {
 } from "assets/jss/material-kit-pro-react.js";
 
 import imagesStyle from "assets/jss/material-kit-pro-react/imagesStyles.js";
-
+import customCheckboxRadioSwitch from "assets/jss/material-kit-pro-react/customCheckboxRadioSwitchStyle.js";
+import customSelectStyle from "assets/jss/material-kit-pro-react/customSelectStyle.js";
 import tooltipsStyle from "assets/jss/material-kit-pro-react/tooltipsStyle.js";
 
 const profilePageStyle = {
   ...imagesStyle,
   ...tooltipsStyle,
+  ...customSelectStyle,
+  ...customCheckboxRadioSwitch,
   cardTitleWhite: {
     ...cardTitle,
     color: whiteColor + "  !important"
@@ -179,6 +182,12 @@ const profilePageStyle = {
   },
   mapContainer: {
     position: "relative"
+  },
+  timeSelection: {
+    padding: "0 0 30px 0"
+  },
+  dateTime: {
+    color: "blue",
   }
 };
 

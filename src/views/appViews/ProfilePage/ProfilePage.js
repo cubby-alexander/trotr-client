@@ -1,24 +1,15 @@
 /*eslint-disable*/
-import React from "react";
-import {useContext} from "react";
+import React, {useState} from "react";
+import {useContext, useEffect} from "react";
 import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import People from "@material-ui/icons/People";
-import Add from "@material-ui/icons/Add";
-import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
@@ -26,7 +17,6 @@ import NavPills from "components/appComponents/NavPills/NavPills.js";
 import Card from "components/appComponents/Card/Card.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import CardHeader from "components/appComponents/Card/CardHeader.js";
-import Badge from "components/Badge/Badge.js";
 import Muted from "components/Typography/Muted.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Clearfix from "components/Clearfix/Clearfix.js";
@@ -45,15 +35,17 @@ import kendall from "assets/img/faces/kendall.jpg";
 import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
 
 import profilePageStyle from "./profilePageStyle.js";
-import ImageUpload from "../../../components/appComponents/CustomUpload/ImageUpload";
 import ResidenceSettings from "./ProfileTabs/ResidenceSettings";
 import SetUpForms from "./SetUpForms/SetUpForms";
+import RecurringFooter from "../recurringViews/RecurringFooter/RecurringFooter";
 
 const useStyles = makeStyles(profilePageStyle);
 
 export default function ProfilePage(props, { ...rest }) {
     const context = useContext(ApplicationContext);
-  const [avatar, setAvatar] = React.useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [data, setData] = useState({});
   React.useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -66,20 +58,27 @@ export default function ProfilePage(props, { ...rest }) {
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
 
-  const changeAvatar = (file) => {
-    setAvatar(file);
-  };
-
     // ${props.match.params.id}
 
-    context.authentication = { id: "60cdffe84bf117c389ee9947"}
 
-  let requestedUser = axios.get(`http://localhost:3000/user/${props.match.params.id}`)
-      .then(res => {
-        requestedUser = res;
-        console.log(res)
-      })
-      .catch(err => console.log(err));
+
+    useEffect(() => {
+        const checkUser = async () => {
+            axios.get(`http://localhost:3000/user/${props.match.params.id}`)
+                .then(res => {
+                    console.log(res.data, ("domestic" in res.data));
+                    setData(res.data);
+                    setLoading(false);
+                    context.authentication = {
+                        id: data._id,
+                        avatar: data.avatar,
+                        name: data.name,
+                    }
+                })
+                .catch(err => setError(true));
+        };
+        checkUser()
+    }, []);
 
   return (
       <div>
@@ -99,8 +98,10 @@ export default function ProfilePage(props, { ...rest }) {
             filter="dark"
             className={classes.parallax}
         />
-      { requestedUser.domestic ?
-  (<div className={classNames(classes.main, classes.mainRaised)}>
+          {error && <div>Something went wrong ...</div>}
+          {loading && <div>Loading ...</div>}
+          {(!loading && "domestic" in data) ?
+            (<div className={classNames(classes.main, classes.mainRaised)}>
       <div className={classes.container}>
         <GridContainer justify="center">
           {/*</GridItem>*/}
@@ -385,61 +386,9 @@ export default function ProfilePage(props, { ...rest }) {
         <Clearfix />
       </div>
     </div>) :
-      <SetUpForms />
-      }
-        <Footer
-            content={
-              <div>
-                <div className={classes.left}>
-                  <List className={classes.list}>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                          href="https://www.creative-tim.com/?ref=mkpr-profile"
-                          target="_blank"
-                          className={classes.block}
-                      >
-                        Creative Tim
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                          href="https://www.creative-tim.com/presentation?ref=mkpr-profile"
-                          target="_blank"
-                          className={classes.block}
-                      >
-                        About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a href="//blog.creative-tim.com/" className={classes.block}>
-                        Blog
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                          href="https://www.creative-tim.com/license?ref=mkpr-profile"
-                          target="_blank"
-                          className={classes.block}
-                      >
-                        Licenses
-                      </a>
-                    </ListItem>
-                  </List>
-                </div>
-                <div className={classes.right}>
-                  &copy; {1900 + new Date().getYear()} , made with{" "}
-                  <Favorite className={classes.icon}/> by{" "}
-                  <a
-                      href="https://www.creative-tim.com?ref=mkpr-profile"
-                      target="_blank"
-                  >
-                    Creative Tim
-                  </a>{" "}
-                  for a better web.
-                </div>
-              </div>
-            }
-        />
+            <SetUpForms />
+        }}
+        <RecurringFooter />
       </div>
   );
 }

@@ -141,7 +141,7 @@ material-kit-pro
     │   ├── CustomUpload
     │   │   └── ImageUpload.js
     │   ├── Footer
-    │   │   └── Footer.js
+    │   │   └── RecurringFooter.js
     │   ├── Grid
     │   │   ├── GridContainer.js
     │   │   └── GridItem.js

@@ -294,7 +294,7 @@ export default function HeaderLinks(props) {
                   block
                   className={classes.accountLink}
                   onClick={() => {
-                    history.push('/');
+                    history.push('/login-page');
                     delete context.authentication;
                   }}
               >

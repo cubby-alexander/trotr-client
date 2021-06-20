@@ -3,10 +3,11 @@ import {useState, useRef} from "react";
 import {GoogleMap, StandaloneSearchBox} from '@react-google-maps/api';
 import { Circle } from '@react-google-maps/api';
 import {LoadScript} from "@react-google-maps/api";
+import {Button} from "@material-ui/core";
 
 const containerStyle = {
     height: "400px",
-    width: "400px",
+    width: "100%",
     position: "relative",
     margin: "20px auto",
 };
@@ -121,7 +122,17 @@ export default function SearchBox(props) {
                     />
                 )}
             </GoogleMap>
-
+            {socialFence && <Button
+                color="primary"
+                round
+                onClick={() => {
+                    props.onAreaReset();
+                    setDisplaySearch(true);
+                    setSocialFence(false);
+                }
+                }>
+                Change City
+            </Button>}
         </LoadScript>
     )
 }

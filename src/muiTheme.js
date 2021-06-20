@@ -16,6 +16,13 @@ const muiTheme = createMuiTheme({
             '"Segoe UI Symbol"',
         ].join(','),
     },
+    palette: {
+        primary: {
+            main: "#004643",
+            light: "#abd1c6",
+            dark: "#001e1d"
+        }
+    },
 });
 
 export default muiTheme;

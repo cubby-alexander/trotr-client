@@ -20,6 +20,10 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Email from "@material-ui/icons/Email";
 import CustomInput from "../../../../components/appComponents/CustomInput/CustomInput";
 import SearchBox from "../../../../components/appComponents/Map/SearchBox";
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Datetime from "react-datetime";
+import FormControl from "@material-ui/core/FormControl";
 
 const useStyles = makeStyles(styles);
 
@@ -27,16 +31,18 @@ export default function SetUpForms(props) {
     const context = useContext(ApplicationContext);
     const history = useHistory();
     const classes = useStyles();
+    const [checkedA, setCheckedA] = React.useState(true);
+    const [checkedB, setCheckedB] = React.useState(true);
     const [formStage, setFormStage] = useState(0);
     const [avatar, setAvatar] = useState("https://res.cloudinary.com/djipxounx/image/upload/v1624115513/placeholder_bgwuxw.jpg");
     const [phone, setPhone] = useState("");
-    const [lat, setLat] = useState("");
-    const [lng, setLng] = useState("");
-    const [socialFence, setSocialFence] = useState(5);
-    const [sleepStart, setSleepStart] = useState(0);
-    const [sleepEnd, setSeleepEnd] = useState(0);
-    const [workStart, setWorkStart] = useState(0);
-    const [workEnd, setWorkEnd] = useState(0);
+    const [lat, setLat] = useState(null);
+    const [lng, setLng] = useState(null);
+    const [socialFence, setSocialFence] = useState(null);
+    const [sleepStart, setSleepStart] = useState(undefined);
+    const [sleepEnd, setSleepEnd] = useState(undefined);
+    const [workStart, setWorkStart] = useState(undefined);
+    const [workEnd, setWorkEnd] = useState(undefined);
     const [areaSet, setAreaSet] = useState(false);
 
     const logout = () => {
@@ -45,8 +51,12 @@ export default function SetUpForms(props) {
     }
 
     const handleNext = () => {
-        if (formStage === 3) {
-            updateUser();
+        if (formStage === 4) {
+            if (lat === null || lng === null || socialFence === null) {
+
+            } else {
+                updateUser();
+            }
         } else if (formStage === 1) {
             updateAvatar();
             setFormStage(formStage + 1)
@@ -105,7 +115,7 @@ export default function SetUpForms(props) {
         };
         axios
             .put(`http://localhost:3000/user/${context.authentication.id}`, userUpdate, axiosConfig)
-            .then((res) => console.log(res.data, "This from Axios"))
+            .then((res) => history.push(`/user/${context.authentication.id}`))
             .catch(err => console.log(err))
     }
 
@@ -182,6 +192,7 @@ export default function SetUpForms(props) {
                             <GridItem xs={12} sm={8} md={3}>
                                 <div className={classes.setupForms}>
                                     <h4>Upload a Profile Picture</h4>
+                                    <p>...or use this trotting deer in the meantime</p>
                                     <ImageUpload
                                         avatar
                                         addButtonProps={{ round: true, color: "warning" }}
@@ -194,7 +205,7 @@ export default function SetUpForms(props) {
                             </GridItem>
                         </GridContainer>
                     )}
-                    {(formStage === 5) && (
+                    {(formStage === 2) && (
                         <GridContainer justify="center">
                             <GridItem xs={12} sm={8} md={3}>
                                 <div className={classes.setupForms}>
@@ -230,30 +241,154 @@ export default function SetUpForms(props) {
                             </GridItem>
                         </GridContainer>
                     )}
-                    {(formStage === 2) && (
+                    {(formStage === 3) && (
                         <GridContainer justify="center">
-                                <h4>Set Contact Information</h4>
-                                <CustomInput
-                                    id="phone"
-                                    formControlProps={{
-                                        fullWidth: true,
-                                        className: classes.input,
-                                    }}
-                                    inputProps={{
-                                        placeholder: "Phone Number...",
-                                        type: "text",
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <Email className={classes.inputIconsColor} />
-                                            </InputAdornment>
-                                        ),
-                                        onChange: (e) => setPhone(e.target.value)
-                                    }}
-                                />
+                            <GridItem xs={10}>
+                                <div>
+                                    <h4 className={classes.setupForms}>A Few Optional Details</h4>
+                                    <p>What number should we send notifications to?</p>
+                                    <CustomInput
+                                        id="phone"
+                                        formControlProps={{
+                                            fullWidth: true,
+                                            className: classes.input,
+                                        }}
+                                        inputProps={{
+                                            placeholder: "Phone Number...",
+                                            type: "text",
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <Email className={classes.inputIconsColor} />
+                                                </InputAdornment>
+                                            ),
+                                            onChange: (e) => setPhone(e.target.value)
+                                        }}
+                                    />
+                                    <br />
+                                    <br />
+                                    <p>Would you like Trotr to take your regular work and sleep schedule into account
+                                        when checking your availability for social engagements? </p>
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={checkedA}
+                                                onChange={event => {
+                                                    setCheckedA(event.target.checked);
+                                                    setWorkStart(undefined);
+                                                    setWorkEnd(undefined);
+                                                    }}
+                                                value="checkedA"
+                                                classes={{
+                                                    switchBase: classes.switchBase,
+                                                    checked: classes.switchChecked,
+                                                    thumb: classes.switchIcon,
+                                                    track: classes.switchBar
+                                                }}
+                                            />
+                                        }
+                                        classes={{
+                                            label: classes.label,
+                                            root: classes.labelRoot
+                                        }}
+                                        label={checkedA ? "Set work schedule" : "Do not set work schedule"}
+                                    />
+                                    <br />
+                                    {checkedA &&
+                                    <div className={classes.timeSelection}>
+                                        <GridItem xs={10} sm={8}>
+                                            <FormControl fullWidth color="primary">
+                                                <Datetime
+                                                    dateFormat={false}
+                                                    onChange={(moment) => setWorkStart(moment._d.getHours())}
+                                                    inputProps={{ placeholder: "Regular Time Starting Work" }}
+                                                />
+                                            </FormControl>
+                                        </GridItem>
+                                        <GridItem xs={10} sm={8}>
+                                            <FormControl fullWidth color="primary">
+                                                <Datetime
+                                                    dateFormat={false}
+                                                    onChange={(moment) => setWorkEnd(moment._d.getHours())}
+                                                    inputProps={{ placeholder: "Regular Time Finishing Work" }}
+                                                />
+                                            </FormControl>
+                                        </GridItem>
+                                    </div>
+                                    }
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={checkedB}
+                                                onChange={event => {
+                                                    setCheckedB(event.target.checked);
+                                                    setSleepStart(undefined);
+                                                    setSleepEnd(undefined);
+                                                }}
+                                                value="checkedA"
+                                                classes={{
+                                                    switchBase: classes.switchBase,
+                                                    checked: classes.switchChecked,
+                                                    thumb: classes.switchIcon,
+                                                    track: classes.switchBar
+                                                }}
+                                            />
+                                        }
+                                        classes={{
+                                            label: classes.label,
+                                            root: classes.labelRoot
+                                        }}
+                                        label={checkedB ? "Set sleep schedule" : "Do not set sleep schedule"}
+                                    />
+                                    {checkedB &&
+                                    <div className={classes.timeSelection}>
+                                        <GridItem xs={10} sm={8}>
+                                            <FormControl fullWidth color="primary">
+                                                <Datetime
+                                                    dateFormat={false}
+                                                    onChange={(moment) => setSleepStart(moment._d.getHours())}
+                                                    inputProps={{ placeholder: "Regular Time To Bed" }}
+                                                />
+                                            </FormControl>
+                                        </GridItem>
+                                        <GridItem xs={10} sm={8}>
+                                            <FormControl fullWidth color="primary">
+                                                <Datetime
+                                                    dateFormat={false}
+                                                    onChange={(moment) => setSleepEnd(moment._d.getHours())}
+                                                    inputProps={{ placeholder: "Regular Time Waking Up" }}
+                                                />
+                                            </FormControl>
+                                        </GridItem>
+                                    </div>
+                                    }
+                                </div>
+                            </GridItem>
+                        </GridContainer>
+                    )}
+                    {(formStage === 4) && (
+                        <GridContainer justify="center">
+                            <GridItem>
+                                {(lat === null || lng === null || socialFence === null) ?
+                                    <div className={classes.setupForms}>
+                                        <h3>Uh oh!</h3>
+                                        <h4>The residential location and social fence settings are required, but it looks
+                                        like you didn't set them.
+                                            <br />
+                                            <br />
+                                        Skip back to that tab and make the necessary selections.
+                                        </h4>
+                                    </div>
+                                    :
+                                    <div className={classes.setupForms}>
+                                        <h3>All set!</h3>
+                                        <h4>Click 'Finish' below to confirm your selections and proceed to your
+                                        profile.</h4>
+                                    </div>}
+                            </GridItem>
                         </GridContainer>
                     )}
                     {formStage > 0 && <ProgressBar
-                        steps={4}
+                        steps={5}
                         step={formStage}
                         handleNext={e => handleNext()}
                         handleBack={e => handleBack()}
