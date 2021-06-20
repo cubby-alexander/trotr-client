@@ -76,66 +76,6 @@ export default function LandingPage({ ...rest }) {
           </GridContainer>
         </div>
       </Parallax>
-      {/*<div className={classNames(classes.main, classes.mainRaised)}>*/}
-      {/*  <div className={classes.container}>*/}
-      {/*    <SectionProduct />*/}
-      {/*    <SectionTeam />*/}
-      {/*    <SectionWork />*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-      {/*<RecurringFooter*/}
-      {/*  content={*/}
-      {/*    <div>*/}
-      {/*      <div className={classes.left}>*/}
-      {/*        <List className={classes.list}>*/}
-      {/*          <ListItem className={classes.inlineBlock}>*/}
-      {/*            <a*/}
-      {/*              href="https://www.creative-tim.com/?ref=mkpr-landing"*/}
-      {/*              target="_blank"*/}
-      {/*              className={classes.block}*/}
-      {/*            >*/}
-      {/*              Creative Tim*/}
-      {/*            </a>*/}
-      {/*          </ListItem>*/}
-      {/*          <ListItem className={classes.inlineBlock}>*/}
-      {/*            <a*/}
-      {/*              href="https://www.creative-tim.com/presentation?ref=mkpr-landing"*/}
-      {/*              target="_blank"*/}
-      {/*              className={classes.block}*/}
-      {/*            >*/}
-      {/*              About us*/}
-      {/*            </a>*/}
-      {/*          </ListItem>*/}
-      {/*          <ListItem className={classes.inlineBlock}>*/}
-      {/*            <a href="//blog.creative-tim.com/" className={classes.block}>*/}
-      {/*              Blog*/}
-      {/*            </a>*/}
-      {/*          </ListItem>*/}
-      {/*          <ListItem className={classes.inlineBlock}>*/}
-      {/*            <a*/}
-      {/*              href="https://www.creative-tim.com/license?ref=mkpr-landing"*/}
-      {/*              target="_blank"*/}
-      {/*              className={classes.block}*/}
-      {/*            >*/}
-      {/*              Licenses*/}
-      {/*            </a>*/}
-      {/*          </ListItem>*/}
-      {/*        </List>*/}
-      {/*      </div>*/}
-      {/*      <div className={classes.right}>*/}
-      {/*        &copy; {1900 + new Date().getYear()} , made with{" "}*/}
-      {/*        <Favorite className={classes.icon} /> by{" "}*/}
-      {/*        <a*/}
-      {/*          href="https://www.creative-tim.com/?ref=mkpr-landing"*/}
-      {/*          target="_blank"*/}
-      {/*        >*/}
-      {/*          Creative Tim*/}
-      {/*        </a>{" "}*/}
-      {/*        for a better web.*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  }*/}
-      {/*/>*/}
     </div>
   );
 }

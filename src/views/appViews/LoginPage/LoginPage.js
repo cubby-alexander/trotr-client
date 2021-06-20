@@ -47,8 +47,6 @@ export default function LoginPage() {
   });
   const classes = useStyles();
 
-  console.log(context);
-
   const attemptLogin = () => {
     let axiosConfig = {
       "Content-Type": "application/json;charset=UTF-8",
@@ -58,7 +56,6 @@ export default function LoginPage() {
       email,
       password
     };
-    console.log(user);
     axios.post("http://localhost:3000/user/login", user, axiosConfig)
         .then((res) => {
           context.authentication = {
@@ -66,15 +63,19 @@ export default function LoginPage() {
             name: res.data.name,
             email: res.data.email,
             avatar: res.data.avatar
+          };
+          if (res.data.domestic === undefined) {
+            console.log(res.data.domestic)
+            history.push(`/user/${res.data._id}/setup`);
+          } else {
+            console.log(res.data.domestic)
+            history.push(`/user/${res.data._id}`)
           }
-          history.push(`/user/${res.data._id}`);
-          console.log(res);
         })
         .catch((err) => console.log(err))
   }
 
   const passwordKeyed = event => {
-    console.log(event.key);
     if (event.key === "Enter") {
       attemptLogin();
     }

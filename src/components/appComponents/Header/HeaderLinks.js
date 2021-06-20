@@ -107,7 +107,7 @@ export default function HeaderLinks(props) {
     }
   }
 
-  console.log(loginModal);
+  console.log(context.authentication);
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
@@ -278,11 +278,13 @@ export default function HeaderLinks(props) {
                   color="transparent"
                   block
                   className={classes.accountLink}
-                  onClick={() => history.push(`/user/${context.authentication._id}`)}
+                  onClick={() => history.push(`/user/${context.authentication.id}`)}
               >
-                <div className={classes.avatarHolder}>
-                  <img src={context.authentication.avatar} className={classes.acctAvatar}/>
-                </div>
+                {(context.authentication.avatar !== undefined) &&
+                  <div className={classes.avatarHolder}>
+                    <img src={context.authentication.avatar} className={classes.acctAvatar}/>
+                  </div>
+              }
                 {context.authentication.name}
               </Button>
             </ListItem>

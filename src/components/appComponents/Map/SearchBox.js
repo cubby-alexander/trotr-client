@@ -13,7 +13,7 @@ const containerStyle = {
 };
 
 export default function SearchBox(props) {
-    const radiusRef = useRef(null);
+    const circleRef = useRef(null);
     const [displaySearch, setDisplaySearch] = useState(true);
     const [center, setCenter] = useState({
             lat: 37.09024,
@@ -46,18 +46,23 @@ export default function SearchBox(props) {
         setDisplaySearch(false);
         props.onAreaSet();
         props.setLatLng(socialFence);
+        props.setRadius(radius);
     };
 
     const onCenterChanged = () => {
-        if (circle !== undefined) {
-            console.log(circle)
+        if (circleRef.current === null) {return};
+        let coordinates = {
+            lat: circleRef.current.state.circle.lat,
+            lng: circleRef.current.state.circle.lng
         }
+        setSocialFence(coordinates);
+        props.setLatLng(coordinates);
     }
 
     const onRadiusChanged = () => {
-        if (radiusRef.current === null) {return}
-        setRadius(radiusRef.current.state.circle.radius);
-        props.setRadius(radiusRef.current.state.circle.radius)
+        if (circleRef.current === null) {return}
+        setRadius(circleRef.current.state.circle.radius);
+        props.setRadius(circleRef.current.state.circle.radius)
     }
 
     return (
@@ -104,7 +109,7 @@ export default function SearchBox(props) {
                 </StandaloneSearchBox>}
                 {socialFence && (
                     <Circle
-                        ref={radiusRef}
+                        ref={circleRef}
                         center={socialFence}
                         radius={radius}
                         editable={true}
@@ -126,6 +131,7 @@ export default function SearchBox(props) {
                 color="primary"
                 round
                 onClick={() => {
+                    console.log("Reset")
                     props.onAreaReset();
                     setDisplaySearch(true);
                     setSocialFence(false);

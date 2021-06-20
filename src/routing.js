@@ -16,6 +16,7 @@ import SignupPage from "./views/appViews/SignupPage/SignupPage";
 import ErrorPage from "./views/ErrorPage/ErrorPage";
 import PresentationPage from "./views/PresentationPage/PresentationPage";
 import HomePage from "./views/appViews/HomePage/HomePage";
+import SetUpForms from "./views/appViews/SetUpForms/SetUpForms";
 import {createBrowserHistory} from "history";
 import React from "react";
 import {Router, Switch, Route} from "react-router";
@@ -33,16 +34,17 @@ export default function Routing(props) {
             <Route path="/contact-us" component={ContactUsPage} />
             <Route path="/ecommerce-page" component={EcommercePage} />
             <Route path="/landing-page" component={LandingPage} />
-            <Route path="/login-page" component={LoginPage} />
             <Route path="/pricing" component={PricingPage} />
-            <Route path="/user/:id" component={Profile} />
             <Route path="/profile-page" component={ProfilePage} />
             <Route path="/product-page" component={ProductPage} />
             <Route path="/sections" component={SectionsPage} />
             <Route path="/shopping-cart-page" component={ShoppingCartPage} />
-            <Route path="/signup" component={SignupPage} />
             <Route path="/error-page" component={ErrorPage} />
             <Route path="/presentation" component={PresentationPage} />
+            <Route path="/login-page" component={LoginPage} />
+            <Route path="/signup" component={SignupPage} />
+            <Route path="/user/:id/setup" component={SetUpForms} />
+            <Route path="/user/:id" component={Profile} />
             <Route path="/" component={HomePage} />
         </Switch>
     </Router>

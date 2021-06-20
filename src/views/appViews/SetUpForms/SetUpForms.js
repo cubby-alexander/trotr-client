@@ -1,33 +1,37 @@
 import React from "react";
 import {useState, useContext} from "react";
 import {useHistory} from "react-router-dom";
-import ApplicationContext from "../../../../ApplicationContext";
+import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
 import classNames from "classnames";
 import {makeStyles} from "@material-ui/core/styles";
-import GridContainer from "../../../../components/Grid/GridContainer";
-import GridItem from "../../../../components/Grid/GridItem";
-import ImageUpload from "../../../../components/appComponents/CustomUpload/ImageUpload";
+import GridContainer from "../../../components/Grid/GridContainer";
+import GridItem from "../../../components/Grid/GridItem";
+import ImageUpload from "../../../components/appComponents/CustomUpload/ImageUpload";
 
-import styles from "../profilePageStyle";
-import InfoArea from "../../../../components/InfoArea/InfoArea";
+import styles from "../ProfilePage/profilePageStyle";
+import InfoArea from "../../../components/InfoArea/InfoArea";
 import ImportContacts from "@material-ui/icons/ImportContacts";
 import {LocationCity} from "@material-ui/icons";
 import {Settings} from "@material-ui/icons";
-import Button from "../../../../components/appComponents/CustomButtons/Button";
-import ProgressBar from "../../../../components/appComponents/ProgressBar/ProgressBar";
+import Button from "../../../components/appComponents/CustomButtons/Button";
+import ProgressBar from "../../../components/appComponents/ProgressBar/ProgressBar";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Email from "@material-ui/icons/Email";
-import CustomInput from "../../../../components/appComponents/CustomInput/CustomInput";
-import SearchBox from "../../../../components/appComponents/Map/SearchBox";
+import CustomInput from "../../../components/appComponents/CustomInput/CustomInput";
+import SearchBox from "../../../components/appComponents/Map/SearchBox";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Datetime from "react-datetime";
 import FormControl from "@material-ui/core/FormControl";
+import Header from "../../../components/appComponents/Header/Header";
+import HeaderLinks from "../../../components/appComponents/Header/HeaderLinks";
+import Parallax from "../../../components/Parallax/Parallax";
+import RecurringFooter from "../recurringViews/RecurringFooter/RecurringFooter";
 
 const useStyles = makeStyles(styles);
 
-export default function SetUpForms(props) {
+export default function SetUpForms(props, {...rest}) {
     const context = useContext(ApplicationContext);
     const history = useHistory();
     const classes = useStyles();
@@ -53,9 +57,9 @@ export default function SetUpForms(props) {
     const handleNext = () => {
         if (formStage === 4) {
             if (lat === null || lng === null || socialFence === null) {
-
             } else {
                 updateUser();
+                history.push(`/user/${context.authentication.id}`)
             }
         } else if (formStage === 1) {
             updateAvatar();
@@ -80,14 +84,9 @@ export default function SetUpForms(props) {
                 "Access-Control-Allow-Origin": "*",
             }
         };
-        let updatedUser = {
-            phone,
-        };
         let data = new FormData();
-        data.append("phone", phone);
         data.append("avatar", avatar);
-        console.log(avatar);
-        axios.put(`http://localhost:3000/user/${context.authentication.id}`, data, axiosConfig)
+        axios.put(`http://localhost:3000/user/${context.authentication.id}/avatar`, data, axiosConfig)
             .then(res => {
                 console.log(res.data)
             })
@@ -119,9 +118,25 @@ export default function SetUpForms(props) {
             .catch(err => console.log(err))
     }
 
-
     return (
-        <div className={classNames(classes.main, classes.mainRaised)}>
+        <div>
+            <Header
+                color="transparent"
+                brand=""
+                links={<HeaderLinks dropdownHoverColor="primary"/>}
+                fixed
+                changeColorOnScroll={{
+                    height: 200,
+                    color: "primary"
+                }}
+                {...rest}
+            />
+            <Parallax
+                image={require("assets/img/examples/city.jpg")}
+                filter="dark"
+                className={classes.parallax}
+            />
+            <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
                     {(formStage === 0) &&
                     <GridContainer justify="center">
@@ -230,7 +245,12 @@ export default function SetUpForms(props) {
                                             }
                                     <SearchBox
                                         onAreaSet={() => setAreaSet(true)}
-                                        onAreaReset={() => setAreaSet(false)}
+                                        onAreaReset={() => {
+                                            setAreaSet(false);
+                                            setLat(null);
+                                            setLng(null);
+                                            setSocialFence(null);
+                                        }}
                                         setLatLng={(coordinates) => {
                                             setLat(coordinates.lat);
                                             setLng(coordinates.lng)
@@ -394,6 +414,8 @@ export default function SetUpForms(props) {
                         handleBack={e => handleBack()}
                     />}
                 </div>
+        </div>
+            <RecurringFooter />
         </div>
     )
 }
