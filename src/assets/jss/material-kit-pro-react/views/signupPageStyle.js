@@ -33,9 +33,9 @@ const signupPageStyle = {
     "&:after": {
       background:
         "linear-gradient(60deg,rgba(" +
-        hexToRgb(primaryColor[4]) +
+        hexToRgb(primaryColor[1]) +
         ",.56),rgba(" +
-        hexToRgb(primaryColor[5]) +
+        hexToRgb(primaryColor[2]) +
         ",.95))"
     },
     "&:before,&:after": {

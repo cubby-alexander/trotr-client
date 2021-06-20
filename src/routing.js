@@ -24,6 +24,7 @@ import {Router, Switch, Route} from "react-router";
 
 export default function Routing(props) {
     var hist = createBrowserHistory();
+
     return(
         <Router history={hist}>
         <Switch>

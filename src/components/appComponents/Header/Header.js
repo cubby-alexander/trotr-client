@@ -23,7 +23,6 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [loginModal, setLoginModal] = React.useState(false);
-  const [signupModal, setSignupModal] = React.useState(false);
   const classes = useStyles();
   React.useEffect(() => {
     if (props.changeColorOnScroll) {

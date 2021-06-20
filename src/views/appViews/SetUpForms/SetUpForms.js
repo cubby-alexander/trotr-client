@@ -49,6 +49,8 @@ export default function SetUpForms(props, {...rest}) {
     const [workEnd, setWorkEnd] = useState(undefined);
     const [areaSet, setAreaSet] = useState(false);
 
+    console.log("Is it loading at all???");
+
     const logout = () => {
         delete context.authentication;
         history.push('/')
@@ -151,7 +153,7 @@ export default function SetUpForms(props, {...rest}) {
                                     <GridItem md={4} sm={4}>
                                         <InfoArea
                                             className={classes.short}
-                                            title="Basic Account Settings"
+                                            title="Basic Profile Information"
                                             description="Choose a profile picture, provide contact information, and make basic account selections that Trotr uses to connect you with your contacts."
                                             icon={Settings}
                                             iconColor="danger"

@@ -1,6 +1,9 @@
 /*eslint-disable*/
 import React from "react";
+import {useState, useContext, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
+import ApplicationContext from "../../../ApplicationContext";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -36,10 +39,12 @@ import image from "assets/img/bg7.jpg";
 const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
-  const [checked, setChecked] = React.useState([1]);
-  const [password, setPassword] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const history = useHistory();
+  const context = useContext(ApplicationContext);
+  const [checked, setChecked] = useState([1]);
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const handleToggle = value => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -50,14 +55,15 @@ export default function SignUpPage({ ...rest }) {
     }
     setChecked(newChecked);
   };
-  React.useEffect(() => {
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   });
+
   const classes = useStyles();
 
   const createUser = () => {
-    console.log("Axios")
     let axiosConfig = {
       headers: {
         'Content-Type': 'application/json;char=UTF-8',
@@ -66,7 +72,13 @@ export default function SignUpPage({ ...rest }) {
     };
     let newUser = { name, email, password};
     axios.post("http://localhost:3000/user/", newUser, axiosConfig)
-        .then((res) => console.log(res))
+        .then((res) => {
+          context.authentication = {
+            id: res.data._id,
+            ...res.data
+          };
+          history.push(`/user/${res.data._id}/setup`)
+        })
         .catch((err) => console.log(err))
   }
 
@@ -76,7 +88,7 @@ export default function SignUpPage({ ...rest }) {
         absolute
         color="transparent"
         brand="Material Kit PRO React"
-        links={<HeaderLinks dropdownHoverColor="rose" />}
+        links={<HeaderLinks dropdownHoverColor="primary" />}
         {...rest}
       />
       <div
@@ -109,32 +121,8 @@ export default function SignUpPage({ ...rest }) {
                         icon={Code}
                         iconColor="primary"
                       />
-                      <InfoArea
-                        className={classes.infoArea}
-                        title="Built Audience"
-                        description="There is also a Fully Customizable CMS Admin Dashboard for this product."
-                        icon={Group}
-                        iconColor="info"
-                      />
                     </GridItem>
                     <GridItem xs={12} sm={5} md={5}>
-                      <div className={classes.textCenter}>
-                        <Button justIcon round color="twitter">
-                          <i className={classes.socials + " fab fa-twitter"} />
-                        </Button>
-                        {` `}
-                        <Button justIcon round color="dribbble">
-                          <i className={classes.socials + " fab fa-dribbble"} />
-                        </Button>
-                        {` `}
-                        <Button justIcon round color="facebook">
-                          <i
-                            className={classes.socials + " fab fa-facebook-f"}
-                          />
-                        </Button>
-                        {` `}
-                        <h4 className={classes.socialTitle}>or be classical</h4>
-                      </div>
                       <form className={classes.form}>
                         <CustomInput
                           formControlProps={{
@@ -191,6 +179,26 @@ export default function SignUpPage({ ...rest }) {
                             placeholder: "Password...",
                             onChange: (e) => {setPassword(e.target.value)}
                           }}
+                        />
+                        <CustomInput
+                            formControlProps={{
+                              fullWidth: true,
+                              className: classes.customFormControlClasses
+                            }}
+                            inputProps={{
+                              startAdornment: (
+                                  <InputAdornment
+                                      position="start"
+                                      className={classes.inputAdornment}
+                                  >
+                                    <Icon className={classes.inputAdornmentIcon}>
+                                      lock_outline
+                                    </Icon>
+                                  </InputAdornment>
+                              ),
+                              placeholder: "Confirm Password...",
+                              onChange: (e) => {setPassword(e.target.value)}
+                            }}
                         />
                         <FormControlLabel
                           classes={{

@@ -1,8 +1,10 @@
 /* eslint-disable */
 import React from "react";
 import {useState, useContext} from "react";
+import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import ApplicationContext from "../../../ApplicationContext";
+import jwt from "jsonwebtoken";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -47,16 +49,22 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
-import LoginModal from "../Login/LoginModal";
-import SignupModal from "../Signup/SignupModal";
+
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const [signupModal, setSignupModal] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
+  const [cookies, setCookies] = useCookies(['jwt']);
   const context = useContext(ApplicationContext);
   const history = useHistory();
+  const [userId, setUserId] = useState("");
+  if (cookies.jwt) {
+    console.log(cookies.jwt);
+    const userData = jwt.decode(cookies.jwt);
+    console.log(userData);
+  }
+
+  console.log(context.authentication);
 
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
@@ -95,17 +103,6 @@ export default function HeaderLinks(props) {
     };
     animateScroll();
   };
-  const changeState = (newState) => {
-    if (newState.modal === "signup") {
-      setSignupModal(false);
-    }
-    if (newState.modal === "login") {
-      setLoginModal(false);
-    }
-    if (newState.followup === "open signin") {
-      setLoginModal(true);
-    }
-  }
 
   console.log(context.authentication);
 
@@ -278,7 +275,7 @@ export default function HeaderLinks(props) {
                   color="transparent"
                   block
                   className={classes.accountLink}
-                  onClick={() => history.push(`/user/${context.authentication.id}`)}
+                  onClick={() => history.push(`/user/${context.authentication._id}`)}
               >
                 {(context.authentication.avatar !== undefined) &&
                   <div className={classes.avatarHolder}>
@@ -297,6 +294,7 @@ export default function HeaderLinks(props) {
                   className={classes.accountLink}
                   onClick={() => {
                     history.push('/login-page');
+                    setCookies("jwt", null);
                     delete context.authentication;
                   }}
               >
@@ -317,7 +315,6 @@ export default function HeaderLinks(props) {
                   <AccountCircle/> Login
                 </Button>
               </Link>
-              <LoginModal isOpen={loginModal} isOpenChange={(newState) => changeState(newState)}/>
             </ListItem>
 
             <ListItem className={classes.listItem}>
@@ -326,11 +323,10 @@ export default function HeaderLinks(props) {
               target="_blank"
               block
               className={classes.navLink}
-              onClick={() => setSignupModal(!signupModal)}
+              onClick={() => history.push('/signup')}
               >
                 <Assignment /> Signup
               </Button>
-              <SignupModal isOpen={signupModal} isOpenChange={(newState) => changeState(newState)} />
             </ListItem>
           </div>}
     </List>

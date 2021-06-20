@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
 import {useCookies} from "react-cookie";
+import jwt from "jsonwebtoken";
 import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
 // @material-ui/core components
@@ -35,7 +36,7 @@ const useStyles = makeStyles(loginPageStyle);
 
 export default function LoginPage() {
   const context = useContext(ApplicationContext);
-  const [cookies, setCookies] = useCookies('jwt');
+  const [cookies, setCookies] = useCookies(['jwt']);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayError, setDisplayError] = useState(false);
@@ -58,18 +59,17 @@ export default function LoginPage() {
     };
     axios.post("http://localhost:3000/user/login", user, axiosConfig)
         .then((res) => {
-          context.authentication = {
-            id: res.data._id,
-            name: res.data.name,
-            email: res.data.email,
-            avatar: res.data.avatar
-          };
-          if (res.data.domestic === undefined) {
-            console.log(res.data.domestic)
-            history.push(`/user/${res.data._id}/setup`);
-          } else {
-            console.log(res.data.domestic)
-            history.push(`/user/${res.data._id}`)
+          if (res.data.token) {
+            setCookies('jwt', res.data.token);
+            const decoded = jwt.decode(res.data.token);
+            context.authentication = decoded.foundUser;
+            if (context.authentication.domestic) {
+              console.log("pushing to profile", decoded.foundUser)
+              history.push(`/user/${decoded.foundUser._id}`);
+            } else {
+              console.log("pushing to setup", decoded.foundUser)
+              history.push(`/user/${decoded.foundUser._id}/setup`)
+            }
           }
         })
         .catch((err) => console.log(err))
