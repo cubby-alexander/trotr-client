@@ -1,10 +1,8 @@
 /* eslint-disable */
 import React from "react";
 import {useState, useContext} from "react";
-import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
 import ApplicationContext from "../../../ApplicationContext";
-import jwt from "jsonwebtoken";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -50,21 +48,12 @@ import Button from "components/appComponents/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";
 
-
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const [cookies, setCookies] = useCookies(['jwt']);
   const context = useContext(ApplicationContext);
   const history = useHistory();
-  const [userId, setUserId] = useState("");
-  if (cookies.jwt) {
-    console.log(cookies.jwt);
-    const userData = jwt.decode(cookies.jwt);
-    console.log(userData);
-  }
-
-  console.log(context.authentication);
+  console.log(context);
 
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
@@ -103,8 +92,6 @@ export default function HeaderLinks(props) {
     };
     animateScroll();
   };
-
-  console.log(context.authentication);
 
   const { dropdownHoverColor } = props;
   const classes = useStyles();
@@ -269,57 +256,52 @@ export default function HeaderLinks(props) {
       </ListItem>
 
       {context.hasOwnProperty("authentication") ?
-            <div className={classes.accountBtns}>
             <ListItem className={classes.listItem}>
-              <Button
-                  color="transparent"
-                  block
-                  className={classes.accountLink}
-                  onClick={() => history.push(`/user/${context.authentication._id}`)}
-              >
-                {(context.authentication.avatar !== undefined) &&
-                  <div className={classes.avatarHolder}>
-                    <img src={context.authentication.avatar} className={classes.acctAvatar}/>
-                  </div>
-              }
-                {context.authentication.name}
-              </Button>
-            </ListItem>
+                <Button
+                    color="transparent"
+                    block
+                    className={classes.navLink}
+                    onClick={() => history.push(`/user/${context.authentication._id}`)}
+                >{(context.authentication.avatar !== undefined) &&
+                <div className={classes.avatarHolder}>
+                  <img src={context.authentication.avatar} className={classes.acctAvatar}/>
+                </div>
+                }
+                  {context.authentication.name}
+                </Button>
+            </ListItem> :
 
+          <ListItem className={classes.listItem}>
+              <Button
+                  block
+                  round
+                  color="transparent"
+                  className={classes.navLink}
+                  onClick={() => history.push('/login-page')}
+              >
+                <AccountCircle/> Login
+              </Button>
+          </ListItem>}
+
+      {context.hasOwnProperty("authentication") ?
             <ListItem className={classes.listItem}>
               <Button
                   color="transparent"
                   target="_blank"
                   block
-                  className={classes.accountLink}
+                  className={classes.navLink}
                   onClick={() => {
+                    delete context.authentication
                     history.push('/login-page');
-                    setCookies("jwt", null);
-                    delete context.authentication;
                   }}
               >
                 <ExitToApp /> Logout
               </Button>
             </ListItem>
-          </div>
           :
-          <div className={classes.accountBtns}>
-            <ListItem className={classes.listItem}>
-              <Link to={'/login-page'} className={classes.dropdownLink}>
-                <Button
-                    block
-                    round
-                    color="transparent"
-                    className={classes.navLink}
-                >
-                  <AccountCircle/> Login
-                </Button>
-              </Link>
-            </ListItem>
-
             <ListItem className={classes.listItem}>
               <Button
-              color="warning"
+              color="transparent"
               target="_blank"
               block
               className={classes.navLink}
@@ -328,7 +310,7 @@ export default function HeaderLinks(props) {
                 <Assignment /> Signup
               </Button>
             </ListItem>
-          </div>}
+          }
     </List>
   );
 }

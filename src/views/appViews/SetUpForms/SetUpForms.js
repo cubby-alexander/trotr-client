@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState, useContext} from "react";
+import {useCookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
+import jwt from "jsonwebtoken";
 import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
 import classNames from "classnames";
@@ -33,6 +35,7 @@ const useStyles = makeStyles(styles);
 
 export default function SetUpForms(props, {...rest}) {
     const context = useContext(ApplicationContext);
+    const [cookies, setCookies, removeCookies] = useCookies(['jwt']);
     const history = useHistory();
     const classes = useStyles();
     const [checkedA, setCheckedA] = React.useState(true);
@@ -49,11 +52,15 @@ export default function SetUpForms(props, {...rest}) {
     const [workEnd, setWorkEnd] = useState(undefined);
     const [areaSet, setAreaSet] = useState(false);
 
-    console.log("Is it loading at all???");
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+    }, [])
 
     const logout = () => {
+        console.log("Logout");
         delete context.authentication;
-        history.push('/')
+        history.push('/');
     }
 
     const handleNext = () => {
@@ -61,7 +68,7 @@ export default function SetUpForms(props, {...rest}) {
             if (lat === null || lng === null || socialFence === null) {
             } else {
                 updateUser();
-                history.push(`/user/${context.authentication.id}`)
+                history.push(`/user/${context.authentication._id}`)
             }
         } else if (formStage === 1) {
             updateAvatar();
@@ -88,7 +95,7 @@ export default function SetUpForms(props, {...rest}) {
         };
         let data = new FormData();
         data.append("avatar", avatar);
-        axios.put(`http://localhost:3000/user/${context.authentication.id}/avatar`, data, axiosConfig)
+        axios.put(`http://localhost:3000/user/${context.authentication._id}/avatar`, data, axiosConfig)
             .then(res => {
                 console.log(res.data)
             })
@@ -115,8 +122,11 @@ export default function SetUpForms(props, {...rest}) {
             }
         };
         axios
-            .put(`http://localhost:3000/user/${context.authentication.id}`, userUpdate, axiosConfig)
-            .then((res) => history.push(`/user/${context.authentication.id}`))
+            .put(`http://localhost:3000/user/${context.authentication._id}`, userUpdate, axiosConfig)
+            .then((res) => {
+                setCookies('jwt', res.data.token);
+                history.push(`/user/${context.authentication._id}`);
+            })
             .catch(err => console.log(err))
     }
 

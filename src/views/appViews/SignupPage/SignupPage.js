@@ -2,6 +2,7 @@
 import React from "react";
 import {useState, useContext, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 import ApplicationContext from "../../../ApplicationContext";
 // @material-ui/core components
@@ -35,12 +36,14 @@ import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
+import {useCookies} from "react-cookie";
 
 const useStyles = makeStyles(signupPageStyle);
 
 export default function SignUpPage({ ...rest }) {
   const history = useHistory();
   const context = useContext(ApplicationContext);
+  const [cookies, setCookies] = useCookies(['jwt']);
   const [checked, setChecked] = useState([1]);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -56,11 +59,6 @@ export default function SignUpPage({ ...rest }) {
     setChecked(newChecked);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.body.scrollTop = 0;
-  });
-
   const classes = useStyles();
 
   const createUser = () => {
@@ -73,11 +71,10 @@ export default function SignUpPage({ ...rest }) {
     let newUser = { name, email, password};
     axios.post("http://localhost:3000/user/", newUser, axiosConfig)
         .then((res) => {
-          context.authentication = {
-            id: res.data._id,
-            ...res.data
-          };
-          history.push(`/user/${res.data._id}/setup`)
+          setCookies('jwt', res.data.token);
+          const newUser = jwt.decode(res.data.token).newUser;
+          context.authentication = newUser;
+          history.push(`/user/${newUser._id}/setup`)
         })
         .catch((err) => console.log(err))
   }

@@ -2,20 +2,14 @@
 import React, {useContext} from "react";
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
-
-import jwt from "jsonwebtoken";
-import ApplicationContext from "../../../ApplicationContext";
-import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Favorite from "@material-ui/icons/Favorite";
-
 // core components
 import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -27,53 +21,19 @@ import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import {Link} from "react-router-dom";
 
-import loginPageStyle from "./loginPageStyle.js";
+import loginPageStyle from "../loginPageStyle.js";
 
 import image from "assets/img/bg7.jpg";
-import SnackbarContent from "../../../components/Snackbar/SnackbarContent";
+import SnackbarContent from "../../../../components/Snackbar/SnackbarContent";
 
 const useStyles = makeStyles(loginPageStyle);
 
-export default function LoginPage() {
-  const context = useContext(ApplicationContext);
+export default function ResetRequest() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [displayError, setDisplayError] = useState(false);
   const history = useHistory();
 
   const classes = useStyles();
-
-  const attemptLogin = () => {
-    let axiosConfig = {
-      "Content-Type": "application/json;charset=UTF-8",
-      "Access-Control-Allow-Origin": "*",
-    };
-    let user = {
-      email,
-      password
-    };
-    axios.post("http://localhost:3000/user/login", user, axiosConfig)
-        .then((res) => {
-          if (res.data.token) {
-            const decoded = jwt.decode(res.data.token);
-            context.authentication = decoded.foundUser;
-            if (context.authentication.domestic) {
-              console.log("pushing to profile", decoded.foundUser)
-              history.push(`/user/${decoded.foundUser._id}`);
-            } else {
-              console.log("pushing to setup", decoded.foundUser._id, decoded.foundUser)
-              history.push(`/user/${decoded.foundUser._id}/setup`)
-            }
-          }
-        })
-        .catch((err) => console.log(err))
-  }
-
-  const passwordKeyed = event => {
-    if (event.key === "Enter") {
-      attemptLogin();
-    }
-  }
 
   return (
       <div
@@ -99,7 +59,7 @@ export default function LoginPage() {
                     </Link>
                   </CardHeader>
                   <CardBody signup>
-                    <h4 className={classes.textCenter}>Login to Account</h4>
+                    <h4 className={classes.textCenter}>Request Password Reset</h4>
                     <CustomInput
                       id="email"
                       formControlProps={{
@@ -116,26 +76,6 @@ export default function LoginPage() {
                         onChange: (e) => setEmail(e.target.value)
                       }}
                     />
-                    <CustomInput
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        placeholder: "Password",
-                        type: "password",
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Icon className={classes.inputIconsColor}>
-                              lock_utline
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off",
-                        onChange: (e) => setPassword(e.target.value),
-                        onKeyPress: (e) => passwordKeyed(e)
-                      }}
-                    />
                   </CardBody>
                   <div className={classes.textCenter}>
                     <Button
@@ -143,12 +83,12 @@ export default function LoginPage() {
                         round
                         onClick={() => attemptLogin()}
                     >
-                      Log In
+                      Send Reset Link
                     </Button>
                     <br />
                     <br />
                     <p>Don't have an account? <Link to='/signup'>Sign up for Trotr</Link></p>
-                    <p>Forgot your login information? <Link to='/reset'>Reset my password.</Link></p>
+                    <p>Remember your password? <Link to='/reset'>Login to my account</Link></p>
                     <br />
                     {displayError ? <SnackbarContent
                         message={

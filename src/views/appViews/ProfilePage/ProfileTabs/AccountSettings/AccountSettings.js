@@ -21,13 +21,13 @@ import ApplicationContext from "../../../../../ApplicationContext";
 
 const useStyles = makeStyles(javascriptStyles);
 
-export default function AccountSettings() {
+export default function AccountSettings(props) {
     const context = useContext(ApplicationContext);
-    const [name, setName] = useState(context.authentication.name);
-    const [email, setEmail] = useState(context.authentication.email);
-    const [phone, setPhone] = useState(context.authentication.password);
-    const [avatar, setAvatar] = useState(context.authentication.avatar);
-    const [password, setPassword] = useState("");
+    const [name, setName] = useState(props.user.name);
+    const [email, setEmail] = useState(props.user.email);
+    const [phone, setPhone] = useState(props.user.phone);
+    const [avatar, setAvatar] = useState(props.user.avatar);
+    const [password, setPassword] = useState(props.user.password);
     const classes = useStyles();
 
     return (

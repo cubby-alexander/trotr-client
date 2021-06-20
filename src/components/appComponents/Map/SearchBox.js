@@ -127,8 +127,9 @@ export default function SearchBox(props) {
                     />
                 )}
             </GoogleMap>
-            {socialFence && <Button
-                color="primary"
+            {socialFence &&
+            <Button
+                color="danger"
                 round
                 onClick={() => {
                     console.log("Reset")
@@ -137,7 +138,7 @@ export default function SearchBox(props) {
                     setSocialFence(false);
                 }
                 }>
-                Change City
+                Choose A Different City
             </Button>}
         </LoadScript>
     )

@@ -20,7 +20,6 @@ export default function RecurringFooter() {
                             <ListItem className={classes.inlineBlock}>
                                 <a
                                     href="https://www.creative-tim.com/?ref=mkpr-profile"
-                                    target="_blank"
                                     className={classes.block}
                                 >
                                     Creative Tim
@@ -29,7 +28,6 @@ export default function RecurringFooter() {
                             <ListItem className={classes.inlineBlock}>
                                 <a
                                     href="https://www.creative-tim.com/presentation?ref=mkpr-profile"
-                                    target="_blank"
                                     className={classes.block}
                                 >
                                     About us
@@ -43,7 +41,6 @@ export default function RecurringFooter() {
                             <ListItem className={classes.inlineBlock}>
                                 <a
                                     href="https://www.creative-tim.com/license?ref=mkpr-profile"
-                                    target="_blank"
                                     className={classes.block}
                                 >
                                     Licenses
@@ -56,7 +53,6 @@ export default function RecurringFooter() {
                         <Favorite className={classes.icon}/> by{" "}
                         <a
                             href="https://www.creative-tim.com?ref=mkpr-profile"
-                            target="_blank"
                         >
                             Creative Tim
                         </a>{" "}

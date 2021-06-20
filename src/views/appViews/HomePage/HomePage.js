@@ -2,9 +2,9 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+
 // nodejs library that concatenates classes
-import classNames from "classnames";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -13,21 +13,15 @@ import ListItem from "@material-ui/core/ListItem";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.js";
+import styles from "./homePageStyles";
 
-// Sections for this page
-// import SectionProduct from "./Sections/SectionProduct.js";
-// import SectionTeam from "./Sections/SectionTeam.js";
-// import SectionWork from "./Sections/SectionWork.js";
-
-const useStyles = makeStyles(landingPageStyle);
+const useStyles = makeStyles(styles);
 
 export default function LandingPage({ ...rest }) {
 
@@ -54,23 +48,25 @@ export default function LandingPage({ ...rest }) {
       <Parallax>
         <div className={classes.container}>
           <GridContainer>
-            <GridItem xs={12} sm={6} md={6}>
+            <GridItem xs={12} sm={8} md={8}>
               <h1 className={classes.title}>"Social Media" That Happens In Person</h1>
-              <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+              <h4 className={classes.heroText}>
+                Life happens in person, not on a screen. Trotr is a social media app that wants to
+                  make it easy for you to connect with your friends in person, like a... person. No
+                  likes. No shares. No doom-scrolls.
+                  <br />
+                  <br />
+                  It's just a quick and easy way to see who you can spend time with, whether you're
+                  travelling, moving, or just out for the afternoon.
               </h4>
               <br />
               <Button
-                color="danger"
+                color="warning"
                 size="lg"
                 target="_blank"
-                onClick={() => history.push('/login-page')}
+                onClick={() => history.push('/signup')}
               >
-                <i className="fas fa-play" />
-                Watch video
+                Get Started
               </Button>
             </GridItem>
           </GridContainer>

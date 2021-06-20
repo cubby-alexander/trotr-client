@@ -1,8 +1,10 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import {useContext, useEffect} from "react";
+import {useCookies} from "react-cookie";
 import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -32,11 +34,13 @@ import AccountSettings from "./ProfileTabs/AccountSettings/AccountSettings";
 import RecurringFooter from "../recurringViews/RecurringFooter/RecurringFooter";
 
 import profilePageStyle from "./profilePageStyle.js";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(profilePageStyle);
 
 export default function ProfilePage(props, { ...rest }) {
     const context = useContext(ApplicationContext);
+    const history = useHistory();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [data, setData] = useState({});
@@ -47,10 +51,12 @@ export default function ProfilePage(props, { ...rest }) {
 
     useEffect(() => {
         const checkUser = async () => {
-            axios.get(`http://localhost:3000/user/${props.match.params.id}`)
+            await axios.get(`http://localhost:3000/user/${props.match.params.id}`)
                 .then(res => {
-                    console.log(res.data, ("domestic" in res.data));
-                    setData(res.data);
+                    setData(jwt.decode(res.data.token).foundUser);
+                    context.authentication = jwt.decode(res.data.token).foundUser;
+                    console.log(!("domestic" in context.authentication));
+                    if (!("domestic" in context.authentication)) history.push(`/user/${props.match.params.id}/setup`);
                     setLoading(false);
                 })
                 .catch(err => {
@@ -157,7 +163,7 @@ export default function ProfilePage(props, { ...rest }) {
                   {
                       tabButton: "Connections",
                       tabContent: (
-                          <AccountSettings />
+                          <AccountSettings user={data} />
                       )
                   },
                 {

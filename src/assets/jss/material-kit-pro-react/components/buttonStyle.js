@@ -116,15 +116,14 @@ const buttonStyle = {
       hexToRgb(warningColor[0]) +
       ", 0.12)",
     "&:hover,&:focus": {
-      color: "#001e1d",
-      backgroundColor: warningColor[0],
+      backgroundColor: primaryColor[0],
       boxShadow:
         "0 14px 26px -12px rgba(" +
-        hexToRgb(warningColor[0]) +
+        hexToRgb(primaryColor[0]) +
         ", 0.42), 0 4px 23px 0px rgba(" +
         hexToRgb(blackColor) +
         ", 0.12), 0 8px 10px -5px rgba(" +
-        hexToRgb(warningColor[0]) +
+        hexToRgb(primaryColor[0]) +
         ", 0.2)"
     }
   },

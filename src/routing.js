@@ -17,12 +17,15 @@ import ErrorPage from "./views/ErrorPage/ErrorPage";
 import PresentationPage from "./views/PresentationPage/PresentationPage";
 import HomePage from "./views/appViews/HomePage/HomePage";
 import SetUpForms from "./views/appViews/SetUpForms/SetUpForms";
+import ResetRequest from "./views/appViews/LoginPage/Reset/ResetRequest";
 import {createBrowserHistory} from "history";
-import React from "react";
+import React, {useContext} from "react";
 import {Router, Switch, Route} from "react-router";
+import ApplicationContext from "./ApplicationContext";
 
 
 export default function Routing(props) {
+    const context = useContext(ApplicationContext);
     var hist = createBrowserHistory();
 
     return(
@@ -43,6 +46,7 @@ export default function Routing(props) {
             <Route path="/error-page" component={ErrorPage} />
             <Route path="/presentation" component={PresentationPage} />
             <Route path="/login-page" component={LoginPage} />
+            <Route path="/reset" component={ResetRequest} />
             <Route path="/signup" component={SignupPage} />
             <Route path="/user/:id/setup" component={SetUpForms} />
             <Route path="/user/:id" component={Profile} />
