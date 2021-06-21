@@ -31,6 +31,7 @@ import Card from "components/appComponents/Card/Card.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
+import SnackbarContent from "../../../../components/appComponents/Snackbar/SnackbarContent";
 
 import signupPageStyle from "./signupPageStyle";
 
@@ -42,12 +43,20 @@ const useStyles = makeStyles(signupPageStyle);
 export default function SignUpPage({ ...rest }) {
   const history = useHistory();
   const context = useContext(ApplicationContext);
-  const [cookies, setCookies] = useCookies(['jwt']);
-  const [checked, setChecked] = useState([1]);
+  const [checked, setChecked] = useState([]);
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [confirmError, setConfirmError] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
+
   const handleToggle = value => {
+    console.log(checked);
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
     if (currentIndex === -1) {
@@ -56,9 +65,45 @@ export default function SignUpPage({ ...rest }) {
       newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
+    console.log(newChecked);
   };
 
   const classes = useStyles();
+
+  const submitSignUp = () => {
+    setDisplayError(false);
+    setErrorMessages([]);
+    let errors = [];
+    console.log(checked);
+    if (password !== confirm || name === "" || checked[0] !== 1 || password === "") {
+      console.log("Assholes");
+      if (password !== confirm) {
+        setPasswordError(true);
+        setConfirmError(true);
+        errors.push("'Password' and 'Confirm Password' fields do not match")
+      }
+      if (password === "") {
+        setPasswordError(true);
+        errors.push("'Password' field is empty")
+      }
+      if (name === "") {
+        setNameError(true);
+        errors.push("'Full Name' field is empty")
+      }
+      if (email === "") {
+        setEmailError(true);
+        errors.push("'Email' field is empty")
+      }
+      if (checked[0] !== 1) {
+        errors.push("Did not agree to terms and conditions");
+      }
+      setDisplayError(true);
+      setErrorMessages(errors);
+    } else {
+      console.log("Creating...")
+      createUser();
+    }
+  }
 
   const createUser = () => {
     let axiosConfig = {
@@ -70,7 +115,6 @@ export default function SignUpPage({ ...rest }) {
     let newUser = { name, email, password};
     axios.post("http://localhost:3000/user/", newUser, axiosConfig)
         .then((res) => {
-          setCookies('jwt', res.data.token);
           const newUser = jwt.decode(res.data.token).newUser;
           context.authentication = newUser;
           history.push(`/user/${newUser._id}/setup`)
@@ -102,7 +146,7 @@ export default function SignUpPage({ ...rest }) {
                 <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
-                      <h4 className={classes.textCenter}>The two step genius of Trotr</h4>
+                      <h4 className={classes.textCenter}>The two step genius of Trotr...</h4>
                       <InfoArea
                         className={classes.infoArea}
                         title="Who's in my area?"
@@ -123,7 +167,8 @@ export default function SignUpPage({ ...rest }) {
                         <CustomInput
                           formControlProps={{
                             fullWidth: true,
-                            className: classes.customFormControlClasses
+                            className: classes.customFormControlClasses,
+                            error: nameError,
                           }}
                           inputProps={{
                             startAdornment: (
@@ -134,14 +179,16 @@ export default function SignUpPage({ ...rest }) {
                                 <Face className={classes.inputAdornmentIcon} />
                               </InputAdornment>
                             ),
-                            placeholder: "First Name...",
+                            placeholder: "Full Name...",
+                            onFocus: () => {setNameError(false)},
                             onChange: (e) => setName(e.target.value)
                           }}
                         />
                         <CustomInput
                           formControlProps={{
                             fullWidth: true,
-                            className: classes.customFormControlClasses
+                            className: classes.customFormControlClasses,
+                            error: emailError
                           }}
                           inputProps={{
                             startAdornment: (
@@ -153,13 +200,15 @@ export default function SignUpPage({ ...rest }) {
                               </InputAdornment>
                             ),
                             placeholder: "Email...",
+                            onFocus: () => {setEmailError(false)},
                             onChange: (e) => setEmail(e.target.value)
                           }}
                         />
                         <CustomInput
                           formControlProps={{
                             fullWidth: true,
-                            className: classes.customFormControlClasses
+                            className: classes.customFormControlClasses,
+                            error: passwordError
                           }}
                           inputProps={{
                             startAdornment: (
@@ -173,13 +222,15 @@ export default function SignUpPage({ ...rest }) {
                               </InputAdornment>
                             ),
                             placeholder: "Password...",
+                            onFocus: () => {setPasswordError(false)},
                             onChange: (e) => {setPassword(e.target.value)}
                           }}
                         />
                         <CustomInput
                             formControlProps={{
                               fullWidth: true,
-                              className: classes.customFormControlClasses
+                              className: classes.customFormControlClasses,
+                              error: confirmError,
                             }}
                             inputProps={{
                               startAdornment: (
@@ -193,7 +244,8 @@ export default function SignUpPage({ ...rest }) {
                                   </InputAdornment>
                               ),
                               placeholder: "Confirm Password...",
-                              onChange: (e) => {setPassword(e.target.value)}
+                              onFocus: () => {setConfirmError(false)},
+                              onChange: (e) => {setConfirm(e.target.value)}
                             }}
                         />
                         <FormControlLabel
@@ -223,7 +275,7 @@ export default function SignUpPage({ ...rest }) {
                           }
                         />
                         <div className={classes.textCenter}>
-                          <Button round color="primary" onClick={() => createUser()}>
+                          <Button round color="primary" onClick={() => submitSignUp()}>
                             Get started
                           </Button>
                         </div>
@@ -231,6 +283,22 @@ export default function SignUpPage({ ...rest }) {
                     </GridItem>
                   </GridContainer>
                 </CardBody>
+                {displayError ? <SnackbarContent
+                    message={
+                      <span>
+                        <b>Form contains missing or incorrect Info:</b>
+                        <br />
+                        <ul>
+                          {errorMessages.map((error, idx) => {
+                            return <li key={idx}>{error}</li>
+                          })}
+                        </ul>
+                      </span>
+                    }
+                    close
+                    color="danger"
+                    icon="info_outline"
+                /> : ""}
               </Card>
             </GridItem>
           </GridContainer>
