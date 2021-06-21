@@ -8,11 +8,11 @@ import Button from "components/appComponents/CustomButtons/Button.js";
 import defaultImage from "assets/img/image_placeholder.jpg";
 import defaultAvatar from "assets/img/appImages/placeholder.jpg";
 
+const defaultAvatarURL = "https://res.cloudinary.com/djipxounx/image/upload/v1624115513/placeholder_bgwuxw.jpg";
+
 export default function ImageUpload(props) {
   const [file, setFile] = React.useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(
-    props.avatar ? defaultAvatar : defaultImage
-  );
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState(props.existing ? props.current : (props.avatar ? defaultAvatar : defaultImage));
   let fileInput = React.createRef();
   const handleImageChange = e => {
     e.preventDefault();
@@ -52,13 +52,19 @@ export default function ImageUpload(props) {
       </div>
       <div>
         {file === null ? (
-          <Button {...addButtonProps} onClick={() => handleClick()}>
-            {avatar ? "Add Photo" : "Select image"}
-          </Button>
+                <div>
+                  <Button {...addButtonProps} onClick={() => handleClick()}>
+                    {avatar ? "Change Photo" : "Select image"}
+                  </Button>
+                  {props.existing &&
+                  <Button {...removeButtonProps} onClick={() => handleRemove()}>
+                    <i className="fas fa-times" /> Remove
+                  </Button>}
+                </div>
         ) : (
           <span>
             <Button {...changeButtonProps} onClick={() => handleClick()}>
-              Change
+              Change Photo
             </Button>
             {avatar ? <br /> : null}
             <Button {...removeButtonProps} onClick={() => handleRemove()}>

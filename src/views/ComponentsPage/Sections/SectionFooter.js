@@ -14,7 +14,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 
 import face1 from "assets/img/faces/card-profile6-square.jpg";
 import face2 from "assets/img/faces/christian.jpg";
@@ -60,7 +60,7 @@ export default function SectionFooter() {
                       target="_blank"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Cubby Alexander
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
@@ -144,7 +144,7 @@ export default function SectionFooter() {
                       target="_blank"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Cubby Alexander
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
@@ -176,14 +176,14 @@ export default function SectionFooter() {
                 </List>
               </div>
               <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
+                &copy; {1900 + new Date().getYear()}, made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
                 <a
                   href="https://www.creative-tim.com?ref=mkpr-footer-components"
                   target="_blank"
                   className={classes.aClasses}
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 for a better web.
               </div>
@@ -356,7 +356,7 @@ export default function SectionFooter() {
                   target="_blank"
                   className={classes.aClasses}
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 All Rights Reserved.
               </div>
@@ -367,7 +367,7 @@ export default function SectionFooter() {
             <GridItem xs={12} sm={4} md={4}>
               <h5>About Us</h5>
               <p>
-                Creative Tim is a startup that creates design tools that make
+                Cubby Alexander is a startup that creates design tools that make
                 the web development process faster and easier.{" "}
               </p>
               <p>
@@ -486,7 +486,7 @@ export default function SectionFooter() {
                 href="https://www.creative-tim.com?ref=mkpr-footer-components"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               All Rights Reserved.
             </div>
@@ -639,7 +639,7 @@ export default function SectionFooter() {
                   href="https://www.creative-tim.com?ref=mkpr-footer-components"
                   target="_blank"
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 All Rights Reserved.
               </div>

@@ -26,7 +26,7 @@ import GridItem from "components/Grid/GridItem.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 
 import contactUsStyle from "assets/jss/material-kit-pro-react/views/contactUsStyle.js";
 
@@ -219,7 +219,7 @@ export default function ContactUsPage() {
                   title="Legal Information"
                   description={
                     <p>
-                      Creative Tim Ltd. <br /> VAT · EN2341241 <br /> IBAN ·
+                      Cubby Alexander Ltd. <br /> VAT · EN2341241 <br /> IBAN ·
                       EN8732ENGB2300099123 <br /> Bank · Great Britain Bank
                     </p>
                   }
@@ -242,7 +242,7 @@ export default function ContactUsPage() {
                     target="_blank"
                     className={classes.block}
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -271,13 +271,13 @@ export default function ContactUsPage() {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-contact-us"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

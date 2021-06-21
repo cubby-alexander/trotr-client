@@ -15,7 +15,7 @@ import Add from "@material-ui/icons/Add";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
@@ -25,8 +25,8 @@ import CardBody from "components/appComponents/Card/CardBody.js";
 import CardHeader from "components/appComponents/Card/CardHeader.js";
 import Badge from "components/Badge/Badge.js";
 import Muted from "components/Typography/Muted.js";
-import Parallax from "components/Parallax/Parallax.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
+import Clearfix from "components/appComponents/Clearfix/Clearfix.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 
 import christian from "assets/img/faces/christian.jpg";
@@ -501,7 +501,7 @@ export default function ProfilePage({ ...rest }) {
                     target="_blank"
                     className={classes.block}
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -530,13 +530,13 @@ export default function ProfilePage({ ...rest }) {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-profile"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

@@ -12,8 +12,8 @@ import Favorite from "@material-ui/icons/Favorite";
 import Header from "components/appComponents/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Parallax from "components/Parallax/Parallax.js";
-import Footer from "components/Footer/Footer.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 // sections for this page
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
 import SectionDescription from "views/AboutUsPage/Sections/SectionDescription.js";
@@ -85,7 +85,7 @@ export default function AboutUsPage() {
                     className={classes.block}
                     target="_blank"
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -118,13 +118,13 @@ export default function AboutUsPage() {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-about-us"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

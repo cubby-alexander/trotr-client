@@ -28,7 +28,7 @@ import Datetime from "react-datetime";
 import FormControl from "@material-ui/core/FormControl";
 import Header from "../../../components/appComponents/Header/Header";
 import HeaderLinks from "../../../components/appComponents/Header/HeaderLinks";
-import Parallax from "../../../components/Parallax/Parallax";
+import Parallax from "../../../components/appComponents/Parallax/Parallax";
 import RecurringFooter from "../recurringViews/RecurringFooter/RecurringFooter";
 
 const useStyles = makeStyles(styles);
@@ -114,7 +114,7 @@ export default function SetUpForms(props, {...rest}) {
             domestic: {
                 lat,
                 lng,
-                social_fence: socialFence,
+                radius: socialFence,
                 sleep_start: sleepStart,
                 sleep_end: sleepEnd,
                 work_start: workStart,
@@ -124,7 +124,6 @@ export default function SetUpForms(props, {...rest}) {
         axios
             .put(`http://localhost:3000/user/${context.authentication._id}`, userUpdate, axiosConfig)
             .then((res) => {
-                setCookies('jwt', res.data.token);
                 history.push(`/user/${context.authentication._id}`);
             })
             .catch(err => console.log(err))

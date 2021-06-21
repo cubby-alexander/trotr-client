@@ -11,8 +11,8 @@ import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
-import Footer from "components/Footer/Footer.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
@@ -82,7 +82,7 @@ export default function BlogPostPage() {
                     target="_blank"
                     className={classes.block}
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -115,13 +115,13 @@ export default function BlogPostPage() {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-blog-post"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

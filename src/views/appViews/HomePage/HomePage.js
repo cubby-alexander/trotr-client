@@ -17,7 +17,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
 
 import styles from "./homePageStyles";
 
@@ -53,7 +53,7 @@ export default function LandingPage({ ...rest }) {
               <h4 className={classes.heroText}>
                 Life happens in person, not on a screen. Trotr is a social media app that wants to
                   make it easy for you to connect with your friends in person, like a... person. No
-                  likes. No shares. No doom-scrolls.
+                  tags. No shares. No doom-scrolls.
                   <br />
                   <br />
                   It's just a quick and easy way to see who you can spend time with, whether you're

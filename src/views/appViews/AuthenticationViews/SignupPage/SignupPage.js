@@ -4,7 +4,7 @@ import {useState, useContext, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import jwt from "jsonwebtoken";
 import axios from "axios";
-import ApplicationContext from "../../../ApplicationContext";
+import ApplicationContext from "../../../../ApplicationContext";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -12,11 +12,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
+import Icon from "@material-ui/core/Icon";
+import {PersonPinCircle} from "@material-ui/icons";
+import EventAvailable from "@material-ui/icons/EventAvailable";
 import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
@@ -24,7 +23,7 @@ import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
@@ -33,7 +32,7 @@ import CardBody from "components/appComponents/Card/CardBody.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 
-import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.js";
+import signupPageStyle from "./signupPageStyle";
 
 import image from "assets/img/bg7.jpg";
 import {useCookies} from "react-cookie";
@@ -84,7 +83,6 @@ export default function SignUpPage({ ...rest }) {
       <Header
         absolute
         color="transparent"
-        brand="Material Kit PRO React"
         links={<HeaderLinks dropdownHoverColor="primary" />}
         {...rest}
       />
@@ -98,24 +96,25 @@ export default function SignUpPage({ ...rest }) {
       >
         <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={10} md={10}>
+            <GridItem xs={12} sm={12} md={10}>
               <Card className={classes.cardSignup}>
                 <h2 className={classes.cardTitle}>Create Trotr Account</h2>
                 <CardBody>
                   <GridContainer justify="center">
                     <GridItem xs={12} sm={5} md={5}>
+                      <h4 className={classes.textCenter}>The two step genius of Trotr</h4>
                       <InfoArea
                         className={classes.infoArea}
-                        title="Marketing"
-                        description="We've created the marketing campaign of the website. It was a very interesting collaboration."
-                        icon={Timeline}
-                        iconColor="rose"
+                        title="Who's in my area?"
+                        description="If your friend is travelling on another continent, they're not free for drinks."
+                        icon={PersonPinCircle}
+                        iconColor="success"
                       />
                       <InfoArea
                         className={classes.infoArea}
-                        title="Fully Coded in HTML5"
-                        description="We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub."
-                        icon={Code}
+                        title="Are they available?"
+                        description={`Skip the schedule dance and figure out when you're both free.`}
+                        icon={EventAvailable}
                         iconColor="primary"
                       />
                     </GridItem>
@@ -247,7 +246,7 @@ export default function SignUpPage({ ...rest }) {
                       target="_blank"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Cubby Alexander
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
@@ -279,13 +278,13 @@ export default function SignUpPage({ ...rest }) {
                 </List>
               </div>
               <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
+                &copy; {1900 + new Date().getYear()}, made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
                 <a
                   href="https://www.creative-tim.com?ref=mkpr-signup"
                   target="_blank"
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 for a better web.
               </div>

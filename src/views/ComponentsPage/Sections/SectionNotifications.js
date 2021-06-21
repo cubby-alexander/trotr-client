@@ -6,8 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Check from "@material-ui/icons/Check";
 import Warning from "@material-ui/icons/Warning";
 // core components
-import SnackbarContent from "components/Snackbar/SnackbarContent.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
+import SnackbarContent from "components/appComponents/Snackbar/SnackbarContent.js";
+import Clearfix from "components/appComponents/Clearfix/Clearfix.js";
 import notificationsStyles from "assets/jss/material-kit-pro-react/views/componentsSections/notificationsStyles.js";
 
 const useStyles = makeStyles(notificationsStyles);

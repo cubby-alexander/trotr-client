@@ -1,7 +1,7 @@
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Favorite from "@material-ui/icons/Favorite";
-import Footer from "../../../../components/Footer/Footer";
+import Footer from "../../../../components/appComponents/Footer/Footer";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import profilePageStyle from "../../ProfilePage/profilePageStyle.js";
@@ -22,7 +22,7 @@ export default function RecurringFooter() {
                                     href="https://www.creative-tim.com/?ref=mkpr-profile"
                                     className={classes.block}
                                 >
-                                    Creative Tim
+                                    Cubby Alexander
                                 </a>
                             </ListItem>
                             <ListItem className={classes.inlineBlock}>
@@ -49,12 +49,12 @@ export default function RecurringFooter() {
                         </List>
                     </div>
                     <div className={classes.right}>
-                        &copy; {1900 + new Date().getYear()} , made with{" "}
+                        &copy; {1900 + new Date().getYear()}, made with{" "}
                         <Favorite className={classes.icon}/> by{" "}
                         <a
                             href="https://www.creative-tim.com?ref=mkpr-profile"
                         >
-                            Creative Tim
+                            Cubby Alexander
                         </a>{" "}
                         for a better web.
                     </div>

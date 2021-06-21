@@ -1,7 +1,6 @@
 /*eslint-disable*/
 import React, {useState} from "react";
 import {useContext, useEffect} from "react";
-import {useCookies} from "react-cookie";
 import ApplicationContext from "../../../ApplicationContext";
 import axios from "axios";
 import jwt from "jsonwebtoken";
@@ -13,23 +12,14 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Header from "components/appComponents/Header/Header.js";
 import GridContainer from "components/Grid/GridContainer.js";
+import Button from "../../../components/appComponents/CustomButtons/Button";
+import {FlightTakeoff, People, Settings, Timeline, PersonPinCircle} from "@material-ui/icons";
 import GridItem from "components/Grid/GridItem.js";
+import {Hidden} from "@material-ui/core";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import NavPills from "components/appComponents/NavPills/NavPills.js";
-import Card from "components/appComponents/Card/Card.js";
-import CardBody from "components/appComponents/Card/CardBody.js";
-import CardHeader from "components/appComponents/Card/CardHeader.js";
-import Muted from "components/Typography/Muted.js";
-import Parallax from "components/Parallax/Parallax.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
+import Clearfix from "components/appComponents/Clearfix/Clearfix.js";
 
-import oluEletu from "assets/img/examples/olu-eletu.jpg";
-import clemOnojeghuo from "assets/img/examples/clem-onojeghuo.jpg";
-import cynthiaDelRio from "assets/img/examples/cynthia-del-rio.jpg";
-import mariyaGeorgieva from "assets/img/examples/mariya-georgieva.jpg";
-import clemOnojegaw from "assets/img/examples/clem-onojegaw.jpg";
-
-import ResidenceSettings from "./ProfileTabs/ResidenceSettings";
 import AccountSettings from "./ProfileTabs/AccountSettings/AccountSettings";
 import RecurringFooter from "../recurringViews/RecurringFooter/RecurringFooter";
 
@@ -41,9 +31,10 @@ const useStyles = makeStyles(profilePageStyle);
 export default function ProfilePage(props, { ...rest }) {
     const context = useContext(ApplicationContext);
     const history = useHistory();
+    const [profileTab, setProfileTab] = useState("account");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [data, setData] = useState({});
+    const [data, setData] = useState(false);
 
     const classes = useStyles();
 
@@ -89,126 +80,69 @@ export default function ProfilePage(props, { ...rest }) {
         />
           {error && <div>Something went wrong ...</div>}
           {loading && <div>Loading ...</div>}
-          {data && ("name" in data) &&
+          {data &&
             <div className={classNames(classes.main, classes.mainRaised)}>
                 <div className={classes.container}>
                     <GridContainer justify="center">
-                      {/*</GridItem>*/}
-                      {/*  <GridItem xs={12} sm={12} md={6}>*/}
-                      {/*    <div className={classes.profile}>*/}
-                      {/*      <div>*/}
-                      {/*        <img src={christian} alt="..." className={imageClasses} onClick={() => fireAxios()} />*/}
-                      {/*      </div>*/}
-                      {/*      <div className={classes.name}>*/}
-                      {/*        <h3 className={classes.title}>Christian Louboutin</h3>*/}
-                      {/*        <h6>DESIGNER</h6>*/}
-                      {/*        <Button*/}
-                      {/*          justIcon*/}
-                      {/*          simple*/}
-                      {/*          color="dribbble"*/}
-                      {/*          className={classes.margin5}*/}
-                      {/*        >*/}
-                      {/*          <i className={classes.socials + " fab fa-dribbble"} />*/}
-                      {/*        </Button>*/}
-                      {/*        <Button*/}
-                      {/*          justIcon*/}
-                      {/*          simple*/}
-                      {/*          color="twitter"*/}
-                      {/*          className={classes.margin5}*/}
-                      {/*        >*/}
-                      {/*          <i className={classes.socials + " fab fa-twitter"} />*/}
-                      {/*        </Button>*/}
-                      {/*        <Button*/}
-                      {/*          justIcon*/}
-                      {/*          simple*/}
-                      {/*          color="pinterest"*/}
-                      {/*          className={classes.margin5}*/}
-                      {/*        >*/}
-                      {/*          <i className={classes.socials + " fab fa-pinterest"} />*/}
-                      {/*        </Button>*/}
-                      {/*      </div>*/}
-                      {/*    </div>*/}
-                      {/*    <div className={classes.follow}>*/}
-                      {/*      <Tooltip*/}
-                      {/*        id="tooltip-top"*/}
-                      {/*        title="Follow this user"*/}
-                      {/*        placement="top"*/}
-                      {/*        classes={{ tooltip: classes.tooltip }}*/}
-                      {/*      >*/}
-                      {/*        <Button*/}
-                      {/*          justIcon*/}
-                      {/*          round*/}
-                      {/*          color="primary"*/}
-                      {/*          className={classes.followButton}*/}
-                      {/*        >*/}
-                      {/*          <Add className={classes.followIcon} />*/}
-                      {/*        </Button>*/}
-                      {/*      </Tooltip>*/}
-                      {/*    </div>*/}
-                      {/*  </GridItem>*/}
-                </GridContainer>
-        {/*<div className={classNames(classes.description, classes.textCenter)}>*/}
-        {/*  <p>*/}
-        {/*    An artist of considerable range, Chet Faker — the name taken by*/}
-        {/*    Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs*/}
-        {/*    and records all of his own music, giving it a warm, intimate feel*/}
-        {/*    with a solid groove structure.{" "}*/}
-        {/*  </p>*/}
-        {/*</div>*/}
-        <div className={classes.profileTabs}>
-          <NavPills
-              alignCenter
-              color="danger"
-              tabs={[
-                  {
-                      tabButton: "Connections",
-                      tabContent: (
-                          <AccountSettings user={data} />
-                      )
-                  },
-                {
-                  tabButton: "Work",
-                  tabContent: (<ResidenceSettings/>)
-                },
-                {
-                  tabButton: "Media",
-                  tabContent: (
-                      <GridContainer justify="center">
-                        <GridItem xs={12} sm={12} md={3}>
-                          <img
-                              alt="..."
-                              src={mariyaGeorgieva}
-                              className={navImageClasses}
-                          />
-                          <img
-                              alt="..."
-                              src={clemOnojegaw}
-                              className={navImageClasses}
-                          />
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={3}>
-                          <img
-                              alt="..."
-                              src={clemOnojeghuo}
-                              className={navImageClasses}
-                          />
-                          <img
-                              alt="..."
-                              src={oluEletu}
-                              className={navImageClasses}
-                          />
-                          <img
-                              alt="..."
-                              src={cynthiaDelRio}
-                              className={navImageClasses}
-                          />
-                        </GridItem>
-                      </GridContainer>
-                  )
-                }
-              ]}
-          />
-        </div>
+                        <Button
+                            round
+                            size="sm"
+                            simple={profileTab !== "engagements"}
+                            color={profileTab === "engagements" ? "warning" : "primary"}
+                            onClick={() => setProfileTab("engagements")}
+                        >
+                            <PersonPinCircle />
+                            <Hidden xsDown>Engagements</Hidden>
+                        </Button>
+
+                        <Button
+                            round
+                            size="sm"
+                            simple={profileTab !== "friends"}
+                            color={profileTab === "friends" ? "warning" : "primary"}
+                            onClick={() => setProfileTab("friends")}
+                        >
+                            <People />
+                            <Hidden xsDown>Friends</Hidden>
+                        </Button>
+                        <Button
+                            round
+                            size="sm"
+                            simple={profileTab !== "timeline"}
+                            color={profileTab === "timeline" ? "warning" : "primary"}
+                            onClick={() => setProfileTab("timeline")}
+                        >
+                            <Timeline />
+                            <Hidden xsDown>Timeline</Hidden>
+                        </Button>
+
+                        <Button
+                            round
+                            size="sm"
+                            simple={profileTab !== "trips"}
+                            color={profileTab === "trips" ? "warning" : "primary"}
+                            onClick={() => setProfileTab("trips")}
+                        >
+                            <FlightTakeoff />
+                            <Hidden xsDown>Trips</Hidden>
+                        </Button>
+
+                        <Button
+                            round
+                            size="sm"
+                            simple={profileTab !== "account"}
+                            color={profileTab === "account" ? "warning" : "primary"}
+                            onClick={() => setProfileTab("account")}
+                        >
+                            <Settings />
+                            <Hidden xsDown>Account</Hidden>
+                        </Button>
+                    </GridContainer>
+                    {(profileTab === "account") && <AccountSettings user={data} />}
+                    {(profileTab === "trips") && <AccountSettings user={data} />}
+                    {(profileTab === "friends") && <AccountSettings user={data} />}
+                    {(profileTab === "timeline") && <AccountSettings user={data} />}
+                    {(profileTab === "engagements") && <AccountSettings user={data} />}
         <Clearfix />
       </div>
     </div>

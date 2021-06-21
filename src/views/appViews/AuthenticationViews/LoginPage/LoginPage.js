@@ -4,7 +4,7 @@ import {useState} from "react";
 import {useHistory} from "react-router-dom";
 
 import jwt from "jsonwebtoken";
-import ApplicationContext from "../../../ApplicationContext";
+import ApplicationContext from "../../../../ApplicationContext";
 import axios from "axios";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,7 +17,7 @@ import Email from "@material-ui/icons/Email";
 import Favorite from "@material-ui/icons/Favorite";
 
 // core components
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
@@ -27,10 +27,10 @@ import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import {Link} from "react-router-dom";
 
-import loginPageStyle from "./loginPageStyle.js";
+import loginPageStyle from "../authenticationStyles.js";
 
 import image from "assets/img/bg7.jpg";
-import SnackbarContent from "../../../components/Snackbar/SnackbarContent";
+import SnackbarContent from "../../../../components/appComponents/Snackbar/SnackbarContent";
 
 const useStyles = makeStyles(loginPageStyle);
 
@@ -64,6 +64,8 @@ export default function LoginPage() {
               console.log("pushing to setup", decoded.foundUser._id, decoded.foundUser)
               history.push(`/user/${decoded.foundUser._id}/setup`)
             }
+          } else {
+            setDisplayError(true)
           }
         })
         .catch((err) => console.log(err))
@@ -113,6 +115,7 @@ export default function LoginPage() {
                             <Email className={classes.inputIconsColor} />
                           </InputAdornment>
                         ),
+                        onFocus: () => setDisplayError(false),
                         onChange: (e) => setEmail(e.target.value)
                       }}
                     />
@@ -132,6 +135,7 @@ export default function LoginPage() {
                           </InputAdornment>
                         ),
                         autoComplete: "off",
+                        onFocus: () => setDisplayError(false),
                         onChange: (e) => setPassword(e.target.value),
                         onKeyPress: (e) => passwordKeyed(e)
                       }}
@@ -176,7 +180,7 @@ export default function LoginPage() {
                       target="_blank"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Cubby Alexander
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
@@ -208,13 +212,13 @@ export default function LoginPage() {
                 </List>
               </div>
               <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
+                &copy; {1900 + new Date().getYear()}, made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
                 <a
                   href="https://www.creative-tim.com?ref=mkpr-login"
                   target="_blank"
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 for a better web
               </div>

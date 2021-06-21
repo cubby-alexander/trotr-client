@@ -5,7 +5,7 @@ import {
   blackColor,
   whiteColor,
   grayColor,
-  hexToRgb
+  hexToRgb, primaryColor
 } from "assets/jss/material-kit-pro-react.js";
 
 const signupPageStyle = theme => ({

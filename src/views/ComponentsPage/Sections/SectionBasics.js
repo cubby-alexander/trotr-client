@@ -27,7 +27,7 @@ import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomLinearProgress from "components/CustomLinearProgress/CustomLinearProgress.js";
 import Paginations from "components/Pagination/Pagination.js";
 import Badge from "components/Badge/Badge.js";
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import CustomDropdown from "components/appComponents/CustomDropdown/CustomDropdown.js";
 
 import basicsStyle from "assets/jss/material-kit-pro-react/views/componentsSections/basicsStyle.js";
 

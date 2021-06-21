@@ -11,12 +11,12 @@ import ListItem from "@material-ui/core/ListItem";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
 
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.js";
 
@@ -89,7 +89,7 @@ export default function LandingPage({ ...rest }) {
       {/*              target="_blank"*/}
       {/*              className={classes.block}*/}
       {/*            >*/}
-      {/*              Creative Tim*/}
+      {/*              Cubby Alexander*/}
       {/*            </a>*/}
       {/*          </ListItem>*/}
       {/*          <ListItem className={classes.inlineBlock}>*/}
@@ -118,13 +118,13 @@ export default function LandingPage({ ...rest }) {
       {/*        </List>*/}
       {/*      </div>*/}
       {/*      <div className={classes.right}>*/}
-      {/*        &copy; {1900 + new Date().getYear()} , made with{" "}*/}
+      {/*        &copy; {1900 + new Date().getYear()}, made with{" "}*/}
       {/*        <Favorite className={classes.icon} /> by{" "}*/}
       {/*        <a*/}
       {/*          href="https://www.creative-tim.com/?ref=mkpr-landing"*/}
       {/*          target="_blank"*/}
       {/*        >*/}
-      {/*          Creative Tim*/}
+      {/*          Cubby Alexander*/}
       {/*        </a>{" "}*/}
       {/*        for a better web.*/}
       {/*      </div>*/}

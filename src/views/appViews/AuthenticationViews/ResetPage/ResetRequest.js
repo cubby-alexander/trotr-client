@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Email from "@material-ui/icons/Email";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
@@ -21,10 +21,10 @@ import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import {Link} from "react-router-dom";
 
-import loginPageStyle from "../loginPageStyle.js";
+import loginPageStyle from "../authenticationStyles.js";
 
 import image from "assets/img/bg7.jpg";
-import SnackbarContent from "../../../../components/Snackbar/SnackbarContent";
+import SnackbarContent from "../../../../components/appComponents/Snackbar/SnackbarContent";
 
 const useStyles = makeStyles(loginPageStyle);
 
@@ -116,7 +116,7 @@ export default function ResetRequest() {
                       target="_blank"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Cubby Alexander
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
@@ -148,13 +148,13 @@ export default function ResetRequest() {
                 </List>
               </div>
               <div className={classes.right}>
-                &copy; {1900 + new Date().getYear()} , made with{" "}
+                &copy; {1900 + new Date().getYear()}, made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
                 <a
                   href="https://www.creative-tim.com?ref=mkpr-login"
                   target="_blank"
                 >
-                  Creative Tim
+                  Cubby Alexander
                 </a>{" "}
                 for a better web
               </div>

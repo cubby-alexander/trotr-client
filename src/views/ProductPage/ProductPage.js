@@ -19,12 +19,12 @@ import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Accordion from "components/Accordion/Accordion.js";
+import Accordion from "components/appComponents/Accordion/Accordion.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
 import Card from "components/appComponents/Card/Card.js";
 import CardHeader from "components/appComponents/Card/CardHeader.js";
@@ -490,7 +490,7 @@ export default function ProductPage() {
                     target="_blank"
                     className={classes.block}
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -519,14 +519,14 @@ export default function ProductPage() {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-pricing"
                 target="_blank"
                 className={classes.aClasses}
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

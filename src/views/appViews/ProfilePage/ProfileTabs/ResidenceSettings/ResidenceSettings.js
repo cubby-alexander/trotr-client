@@ -1,16 +1,16 @@
 import React from "react";
 
 import {makeStyles} from "@material-ui/core/styles";
-import GridItem from "../../../../components/Grid/GridItem";
-import GridContainer from "../../../../components/Grid/GridContainer";
-import Card from "../../../../components/appComponents/Card/Card";
-import mariyaGeorgieva from "../../../../assets/img/examples/mariya-georgieva.jpg";
-import CardBody from "../../../../components/appComponents/Card/CardBody";
-import Badge from "../../../../components/Badge/Badge";
-import clemOnojeghuo from "../../../../assets/img/examples/clem-onojeghuo.jpg";
-import oluEletu from "../../../../assets/img/examples/olu-eletu.jpg";
-import darrenColeshill from "../../../../assets/img/examples/darren-coleshill.jpg";
-import styles from "../profilePageStyle";
+import GridItem from "../../../../../components/Grid/GridItem";
+import GridContainer from "../../../../../components/Grid/GridContainer";
+import Card from "../../../../../components/appComponents/Card/Card";
+import mariyaGeorgieva from "../../../../../assets/img/examples/mariya-georgieva.jpg";
+import CardBody from "../../../../../components/appComponents/Card/CardBody";
+import Badge from "../../../../../components/Badge/Badge";
+import clemOnojeghuo from "../../../../../assets/img/examples/clem-onojeghuo.jpg";
+import oluEletu from "../../../../../assets/img/examples/olu-eletu.jpg";
+import darrenColeshill from "../../../../../assets/img/examples/darren-coleshill.jpg";
+import styles from "../../profilePageStyle";
 
 const useStyles = makeStyles(styles);
 

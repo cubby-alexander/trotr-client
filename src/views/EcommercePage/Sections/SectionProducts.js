@@ -15,7 +15,7 @@ import Cached from "@material-ui/icons/Cached";
 import Subject from "@material-ui/icons/Subject";
 import Check from "@material-ui/icons/Check";
 // core components
-import Accordion from "components/Accordion/Accordion.js";
+import Accordion from "components/appComponents/Accordion/Accordion.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/appComponents/Card/Card.js";
@@ -23,7 +23,7 @@ import CardHeader from "components/appComponents/Card/CardHeader.js";
 import CardBody from "components/appComponents/Card/CardBody.js";
 import CardFooter from "components/appComponents/Card/CardFooter.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
-import Clearfix from "components/Clearfix/Clearfix.js";
+import Clearfix from "components/appComponents/Clearfix/Clearfix.js";
 
 import suit1 from "assets/img/examples/suit-1.jpg";
 import suit2 from "assets/img/examples/suit-2.jpg";

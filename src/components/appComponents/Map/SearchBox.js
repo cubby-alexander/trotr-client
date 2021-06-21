@@ -132,7 +132,7 @@ export default function SearchBox(props) {
                 color="danger"
                 round
                 onClick={() => {
-                    console.log("Reset")
+                    console.log("ResetPage")
                     props.onAreaReset();
                     setDisplaySearch(true);
                     setSocialFence(false);

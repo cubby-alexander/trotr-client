@@ -43,7 +43,7 @@ import LineStyle from "@material-ui/icons/LineStyle";
 import Error from "@material-ui/icons/Error";
 
 // core components
-import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import CustomDropdown from "components/appComponents/CustomDropdown/CustomDropdown.js";
 import Button from "components/appComponents/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-kit-pro-react/components/headerLinksStyle.js";

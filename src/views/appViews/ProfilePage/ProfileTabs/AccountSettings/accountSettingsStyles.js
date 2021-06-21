@@ -189,6 +189,7 @@ const profilePageStyle = {
   accordianTitleLine: {
     display: "flex",
     flexDirection: "row",
+    flexWrap:"nowrap",
     alignItems: "center"
   },
   accordianTitle: {
@@ -201,6 +202,12 @@ const profilePageStyle = {
   inputAdornmentIcon: {
     color: grayColor[13]
   },
+  infoLine: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  }
 };
 
 export default profilePageStyle;

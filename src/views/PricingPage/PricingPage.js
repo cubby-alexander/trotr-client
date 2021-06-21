@@ -11,10 +11,10 @@ import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/appComponents/Header/Header.js";
 import HeaderLinks from "components/appComponents/Header/HeaderLinks.js";
-import Parallax from "components/Parallax/Parallax.js";
+import Parallax from "components/appComponents/Parallax/Parallax.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
-import Footer from "components/Footer/Footer.js";
+import Footer from "components/appComponents/Footer/Footer.js";
 // sections for this page
 import SectionPricing from "views/PricingPage/Sections/SectionPricing.js";
 import SectionFeatures from "views/PricingPage/Sections/SectionFeatures.js";
@@ -82,7 +82,7 @@ export default function PricingPage() {
                     target="_blank"
                     className={classes.block}
                   >
-                    Creative Tim
+                    Cubby Alexander
                   </a>
                 </ListItem>
                 <ListItem className={classes.inlineBlock}>
@@ -111,13 +111,13 @@ export default function PricingPage() {
               </List>
             </div>
             <div className={classes.right}>
-              &copy; {1900 + new Date().getYear()} , made with{" "}
+              &copy; {1900 + new Date().getYear()}, made with{" "}
               <Favorite className={classes.icon} /> by{" "}
               <a
                 href="https://www.creative-tim.com?ref=mkpr-pricing"
                 target="_blank"
               >
-                Creative Tim
+                Cubby Alexander
               </a>{" "}
               for a better web.
             </div>

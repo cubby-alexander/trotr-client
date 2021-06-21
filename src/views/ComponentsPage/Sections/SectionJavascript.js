@@ -43,7 +43,7 @@ import CardBody from "components/appComponents/Card/CardBody.js";
 import CustomInput from "components/appComponents/CustomInput/CustomInput.js";
 import CustomFileInput from "components/CustomFileInput/CustomFileInput.js";
 import InfoArea from "components/InfoArea/InfoArea.js";
-import Accordion from "components/Accordion/Accordion.js";
+import Accordion from "components/appComponents/Accordion/Accordion.js";
 import ImageUpload from "components/appComponents/CustomUpload/ImageUpload.js";
 
 import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.js";
@@ -208,7 +208,7 @@ export default function SectionJavascript() {
                             href="https://www.creative-tim.com/?ref=mkpr-javascript-components"
                             target="_blank"
                           >
-                            Creative Tim
+                            Cubby Alexander
                           </a>
                           . You can choose a social network or go for the
                           classic version, whatever works best for you.
@@ -227,7 +227,7 @@ export default function SectionJavascript() {
                             href="https://www.creative-tim.com/?ref=mkpr-javascript-components"
                             target="_blank"
                           >
-                            Creative Tim
+                            Cubby Alexander
                           </a>
                           . You can choose a social network or go for the
                           classic version, whatever works best for you.
