@@ -58,7 +58,7 @@ export default function AccountSettings(props) {
         };
         let data = new FormData();
         data.append("avatar", avatar);
-        axios.put(`http://localhost:3000/user/${context.authentication._id}/avatar`, data, axiosConfig)
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}user/${context.authentication._id}/avatar`, data, axiosConfig)
             .then(res => {
                 console.log(res.data)
             })
@@ -88,7 +88,7 @@ export default function AccountSettings(props) {
             }
         };
         axios
-            .put(`http://localhost:3000/user/${context.authentication._id}`, userUpdate, axiosConfig)
+            .put(`${process.env.REACT_APP_BACKEND_URL}user/${context.authentication._id}`, userUpdate, axiosConfig)
             .then((res) => console.log(res))
             .catch(err => console.log(err))
     }
@@ -100,7 +100,7 @@ export default function AccountSettings(props) {
                 "Access-Control-Allow-Origin": "*",
             }
         };
-        axios.delete(`http://localhost:3000/user/${context.authentication._id}`, axiosConfig)
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}user/${context.authentication._id}`, axiosConfig)
             .then(res => console.log(res))
             .catch(err => console.log(err));
         delete context.authentication;

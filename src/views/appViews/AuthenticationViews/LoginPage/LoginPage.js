@@ -52,7 +52,7 @@ export default function LoginPage() {
       email,
       password
     };
-    axios.post("http://localhost:3000/user/login", user, axiosConfig)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}user/login`, user, axiosConfig)
         .then((res) => {
           if (res.data.token) {
             const decoded = jwt.decode(res.data.token);

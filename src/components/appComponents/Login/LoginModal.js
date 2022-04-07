@@ -56,7 +56,7 @@ export default function LoginModal({ isOpen: parentLoginModal, isOpenChange }) {
             }
         };
         let signInUser = { email, password};
-        axios.get("http://localhost:3000/user/", signInUser, axiosConfig)
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}user/`, signInUser, axiosConfig)
             .then((res) => console.log(res))
             .catch((err) => console.log(err))
     }

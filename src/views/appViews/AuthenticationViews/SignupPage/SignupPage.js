@@ -113,7 +113,7 @@ export default function SignUpPage({ ...rest }) {
       }
     };
     let newUser = { name, email, password};
-    axios.post("http://localhost:3000/user/", newUser, axiosConfig)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}user/`, newUser, axiosConfig)
         .then((res) => {
           const newUser = jwt.decode(res.data.token).newUser;
           context.authentication = newUser;
