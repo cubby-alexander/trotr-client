@@ -42,7 +42,7 @@ export default function ProfilePage(props, { ...rest }) {
 
     useEffect(() => {
         const checkUser = async () => {
-            await axios.get(`http://localhost:3000/user/${props.match.params.id}`)
+            await axios.get(`${process.env.REACT_APP_BACKEND_URL}user/${props.match.params.id}`)
                 .then(res => {
                     setData(jwt.decode(res.data.token).foundUser);
                     context.authentication = jwt.decode(res.data.token).foundUser;

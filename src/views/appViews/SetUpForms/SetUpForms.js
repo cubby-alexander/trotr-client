@@ -95,7 +95,7 @@ export default function SetUpForms(props, {...rest}) {
         };
         let data = new FormData();
         data.append("avatar", avatar);
-        axios.put(`http://localhost:3000/user/${context.authentication._id}/avatar`, data, axiosConfig)
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}user/${context.authentication._id}/avatar`, data, axiosConfig)
             .then(res => {
                 console.log(res.data)
             })
@@ -122,7 +122,7 @@ export default function SetUpForms(props, {...rest}) {
             }
         };
         axios
-            .put(`http://localhost:3000/user/${context.authentication._id}`, userUpdate, axiosConfig)
+            .put(`${process.env.REACT_APP_BACKEND_URL}user/${context.authentication._id}`, userUpdate, axiosConfig)
             .then((res) => {
                 history.push(`/user/${context.authentication._id}`);
             })
